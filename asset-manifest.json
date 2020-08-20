@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/davidcarr3ra.github.io/static/css/main.297747fa.chunk.css",
+    "main.js": "/davidcarr3ra.github.io/static/js/main.d90f9de6.chunk.js",
+    "main.js.map": "/davidcarr3ra.github.io/static/js/main.d90f9de6.chunk.js.map",
+    "runtime-main.js": "/davidcarr3ra.github.io/static/js/runtime-main.af803f48.js",
+    "runtime-main.js.map": "/davidcarr3ra.github.io/static/js/runtime-main.af803f48.js.map",
+    "static/css/2.3c03f26f.chunk.css": "/davidcarr3ra.github.io/static/css/2.3c03f26f.chunk.css",
+    "static/js/2.87220242.chunk.js": "/davidcarr3ra.github.io/static/js/2.87220242.chunk.js",
+    "static/js/2.87220242.chunk.js.map": "/davidcarr3ra.github.io/static/js/2.87220242.chunk.js.map",
+    "index.html": "/davidcarr3ra.github.io/index.html",
+    "precache-manifest.c52948a87403961abe1121552e3765e0.js": "/davidcarr3ra.github.io/precache-manifest.c52948a87403961abe1121552e3765e0.js",
+    "service-worker.js": "/davidcarr3ra.github.io/service-worker.js",
+    "static/css/2.3c03f26f.chunk.css.map": "/davidcarr3ra.github.io/static/css/2.3c03f26f.chunk.css.map",
+    "static/css/main.297747fa.chunk.css.map": "/davidcarr3ra.github.io/static/css/main.297747fa.chunk.css.map",
+    "static/js/2.87220242.chunk.js.LICENSE.txt": "/davidcarr3ra.github.io/static/js/2.87220242.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.af803f48.js",
+    "static/css/2.3c03f26f.chunk.css",
+    "static/js/2.87220242.chunk.js",
+    "static/css/main.297747fa.chunk.css",
+    "static/js/main.d90f9de6.chunk.js"
+  ]
+}

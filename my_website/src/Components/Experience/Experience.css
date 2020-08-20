@@ -1,0 +1,132 @@
+#experience h3, #experience p {
+	margin: 0;
+}
+
+#experience p.info {
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+
+.bottom_line {
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.row_work {
+	width: 90%;
+  	max-width: 1020px;
+  	margin: 0 auto;
+  	margin-bottom: 48px;
+   	padding-bottom: 24px;
+}
+
+.container2 {
+	display: grid;
+	grid-template-rows: 10% 35% 30% 30%;
+	grid-template-columns: 31% 31% 31%;
+	grid-row-gap: 30px;
+	grid-column-gap: 20px;
+	padding-bottom: 150px;
+}
+
+.experience_title {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	display: flex;
+	align-items: center;
+}
+
+.work_image {
+	width: 275px;
+}
+
+.pic_container {
+	display: flex;
+	align-self: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.descr {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.cardinal_descr {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+.cardinal_pic {
+	grid-column-start: 3;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.afb_descr {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 3;
+	grid-row-end: 4;
+	text-align: right;
+}
+.afb_pic {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 3;
+	grid-row-end: 4;
+}
+
+.franks_descr {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 4;
+}
+
+.franks_pic {
+	grid-column-start: 3;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 4;
+}
+
+@media only screen and (max-width: 810px) {
+	.container2 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-bottom: 50px;
+	}
+
+	.descr {
+		align-items: center;
+	}
+
+	#experience p {
+		text-align: center;
+	}
+
+	.pic_container {
+		margin-bottom: 55px;
+		padding-bottom: 35px;
+		border-bottom: 1px solid #E8E8E8;
+	}
+
+	#experience .bottom_line {
+		visibility: hidden;
+	}
+
+	.row_work {
+		margin-bottom: 0;
+	}
+
+	#experience {
+		padding-bottom: 0;
+	}
+
+}

@@ -1,0 +1,13 @@
+.sphere {
+	display: flex;
+	align-items: center;
+}
+
+header {
+	height: 100vh;
+}
+/*
+section#home {
+	height: 100vh;
+
+}*/

@@ -1,0 +1,37 @@
+.row_bookshelf {
+	width: 94%;
+	max-width: 1135px;
+	margin: 0 auto;
+}
+
+/* .container_bookshelf {
+	display: grid;
+	grid-template-columns: 70% 30%;
+	grid-template-rows: 15% 85%;
+    min-height: 500px;
+} */
+
+.books {
+    /* grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2; */
+    /* padding-left: 50px; */
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.bookshelf_title {
+    text-align: center;
+}
+.bookshelf_intro {
+    text-align: center;
+    color: #000;
+    padding-top: 50px;
+}
+
+.bookshelf_intro p {
+    margin: 0;
+}

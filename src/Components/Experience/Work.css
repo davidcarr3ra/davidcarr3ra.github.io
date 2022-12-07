@@ -1,0 +1,217 @@
+#experience h3, #experience p {
+	margin: 0;
+}
+
+#experience p.info {
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+
+.bottom_line {
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.row_work {
+	width: 94%;
+  	max-width: 1135px;
+  	margin: 0 auto;
+  	/*margin-bottom: 48px;
+   	padding-bottom: 24px;*/
+}
+
+.work_grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(330px, 3fr));
+	grid-gap: 30px;
+	padding-top: 50px;
+    padding-bottom: 40px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.work_box {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	position: relative;
+	opacity: 1;
+	transition: .5s ease;
+	height: 40rem;
+}
+
+/* .wrapper {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	position: relative;
+} */
+
+.box1 {
+	display: flex;
+	justify-content: center;
+	opacity: 1;
+	transition: .5s ease;
+	position: absolute;
+}
+
+.box1 img {
+	width: 50%;
+}
+
+.box2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	position: absolute;
+}
+
+.box2 p {
+	width: 80%;
+	text-align: center;
+}
+
+.work_box:hover .box1 {
+	opacity: 0;
+}
+  
+.work_box:hover .box2 {
+	opacity: 1;
+}
+
+.worktitle {
+	text-align: center;
+}
+
+/* 
+.hide {
+	display: none;
+}
+
+.testhover:hover + .hide {
+	display: block;
+} */
+
+.hypermatter {
+	grid-row-start: 2;
+	grid-row-end: 2;
+}
+
+.palantir {
+	grid-row-start: 3;
+	grid-row-end: 3;
+}
+
+.bloomberg {
+	grid-row-start: 4;
+	grid-row-end: 4;
+}
+
+.cardinal {
+	grid-row-start: 5;
+	grid-row-end: 5;
+}
+
+.work_item_descr p {
+	color: #000000;
+}
+
+/* .work_item_title h3 {
+	color: #000000;
+} */
+
+.work_image {
+	width: 275px;
+}
+
+.pic_container {
+	display: flex;
+	align-self: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.descr {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.cardinal_descr {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+.cardinal_pic {
+	grid-column-start: 3;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.afb_descr {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 3;
+	grid-row-end: 4;
+	text-align: right;
+}
+.afb_pic {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 3;
+	grid-row-end: 4;
+}
+
+.franks_descr {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 4;
+}
+
+.franks_pic {
+	grid-column-start: 3;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 4;
+}
+
+@media only screen and (max-width: 810px) {
+	.container2 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-bottom: 50px;
+	}
+
+	.descr {
+		align-items: center;
+	}
+
+	#experience p {
+		text-align: center;
+	}
+
+	.pic_container {
+		margin-bottom: 55px;
+		padding-bottom: 35px;
+		border-bottom: 1px solid #E8E8E8;
+	}
+
+	#experience .bottom_line {
+		visibility: hidden;
+	}
+
+	.row_work {
+		margin-bottom: 0;
+	}
+
+	#experience {
+		padding-bottom: 0;
+	}
+
+}

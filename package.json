@@ -1,7 +1,7 @@
 {
   "name": "my_website",
   "version": "0.1.0",
-  "homepage": "davidcarr3ra.com",
+  "homepage": "https://davidcarr3ra.github.io/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

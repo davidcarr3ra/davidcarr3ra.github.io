@@ -26,7 +26,7 @@ class About extends Component {
          <div className="abouttext">
             <p>Blockchain enthusiast, software engineer, guitarist.</p>
             <p>Born in Colombia, raised in Azerbaijan.</p>
-            <p>Cofounder at Hypermatter Labs.</p>
+            {/*<p>Cofounder at Hypermatter Labs.</p>*/}
             <p>Ex-Bloomberg, Palantir, PrimeDAO, Computer Science at Columbia University</p>
             <p>Board at Blockchain@Columbia.</p>
             <p>Lover of slow walks.</p>

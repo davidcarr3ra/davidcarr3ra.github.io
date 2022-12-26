@@ -21,7 +21,7 @@ class Work extends Component {
             <img src={airpay} />
           </div>
           <div className="box2">
-            <p>Founding engineer for off-ramp product for Sui and Aptos blockchains, backed by Martian Wallet and Mysten labs. Currently in testflight.</p>
+            <p>Founding engineer for off-ramp product on Sui and Aptos blockchains, backed by Martian Wallet and Mysten Labs. Currently in testflight.</p>
           </div>
         </div>
         <div className="experience work_box br4 ba w-100-l shadow-5 pa4"> {/* change wrapper to work box */}

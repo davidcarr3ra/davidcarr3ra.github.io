@@ -21,7 +21,7 @@ const Bookshelf = () => {
 		          	<li><p className="info mb0">Security Analysis<span>&bull;</span> <em className="author">Benjamin Graham and David Dodd</em></p></li>
 		          	<li><p className="info mb0">Deep Work<span>&bull;</span> <em className="author">Cal Newport</em></p></li>
 		          	<li><p className="info mb0">Finance and the Good Society<span>&bull;</span> <em className="author">Robert J. Shiller</em></p></li>
-		          	<li><p className="info mb0">The Black Swan<span>&bull;</span> <em className="author">Nassim Taleb</em></p></li>
+					<li><p className="info mb0">The Alchemist<span>&bull;</span> <em className="author">Paulo Coelho</em></p></li>
 			      </ul>
 	        </div>
 	    </div>

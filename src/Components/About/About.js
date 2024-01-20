@@ -24,11 +24,10 @@ class About extends Component {
       </div>
       <div className="row_about container1">
          <div className="abouttext">
-            <p>Blockchain enthusiast, software engineer, guitarist.</p>
+            <p>Software engineer, guitarist.</p>
             <p>Born in Colombia, raised in Azerbaijan.</p>
-            {/*<p>Cofounder at Hypermatter Labs.</p>*/}
-            <p>Ex-Bloomberg, Palantir, PrimeDAO, Computer Science at Columbia University</p>
-            <p>Board at Blockchain@Columbia.</p>
+            <p>Currently: Engineering @ Palantir</p>
+            <p>Previously: Engineering @ Bloomberg, CS @ Columbia University</p>
             <p>Lover of slow walks.</p>
          </div>
       </div>

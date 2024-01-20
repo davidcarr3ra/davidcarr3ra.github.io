@@ -18,20 +18,20 @@ class Work extends Component {
       <div className="row_work work_grid">
         <div className="experience work_box br4 ba w-100-l shadow-5 pa4"> {/* change wrapper to work box */}
           <div className="box1">
-            <img src={airpay} />
-          </div>
-          <div className="box2">
-            <p>Founding engineer for off-ramp product on Sui and Aptos blockchains, backed by Martian Wallet and Mysten Labs. Currently in testflight.</p>
-          </div>
-        </div>
-        <div className="experience work_box br4 ba w-100-l shadow-5 pa4"> {/* change wrapper to work box */}
-          <div className="box1">
             <img src={palantir} />
           </div>
           <div className="box2">
-            <p>Built an application within Foundry that allows PG&E operators to geospatially visualize, bundle, and edit work on California's electrical grid, minimizing wildfire risk.</p>
+            <p>Led projects in South Korea & USA in aviation, utilities and heavy industries.</p>
           </div>
         </div>
+        {/* <div className="experience work_box br4 ba w-100-l shadow-5 pa4"> change wrapper to work box */}
+          {/* <div className="box1">
+            <img src={airpay} />
+          </div>
+          <div className="box2">
+            <p>Founding engineer for off-ramp product on Sui and Aptos blockchains, backed by Martian Wallet and Mysten Labs.</p>
+          </div>
+        </div> */}
         <div className="experience work_box br4 ba w-100-l shadow-5 pa4"> {/* change wrapper to work box */}
           <div className="box1">
             <img src={bloomberg} />

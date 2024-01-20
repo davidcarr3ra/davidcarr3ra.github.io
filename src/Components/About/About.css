@@ -89,9 +89,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	/* display: grid;
-	grid-template-columns: 30% 70%;
-	grid-template-rows: 20% 80%; */
 }
 
 .abouttitle {
@@ -99,13 +96,10 @@
 }
 
 .abouttext {
-	/* grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 2;
-	grid-row-end: 2; */
 	max-width: 90%;
-	text-align: center;
-	padding-top: 50px;
+	text-align: left;
+	padding-top: 30px;
+	padding-left: 0;
 }
 
 @media only screen and (max-width: 767px) {
@@ -124,10 +118,6 @@
 	#profilepic_container {
 		max-width: 50%;
 		margin-bottom: 20px;
-	}
-
-	.abouttext {
-		padding-left: 0;
 	}
 
 	#about .resume_button1 {

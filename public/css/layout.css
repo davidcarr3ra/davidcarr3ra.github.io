@@ -948,8 +948,8 @@ call-to-action .button {
 .flex-control-nav li {
     margin: 0 6px;
     display: inline-block;
-    zoom: 1;
-    *display: inline;
+    /* zoom: 1;
+    *display: inline; */
 }
 .flex-control-paging li a {
     width: 12px;

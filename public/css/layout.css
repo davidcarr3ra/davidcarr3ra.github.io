@@ -297,36 +297,45 @@ ul#nav li.current a { color: #fe6928; }
 /*----------------------------------------------*/
 
 #projects {
-   background: #16464B;
+   background: #ccc;
    padding-top: 90px;
    padding-bottom: 72px;
    overflow: hidden;
 }
 
-/*#projects a, #projects a:visited  { color: #0762f9; }
-#projects a:hover, #projects a:focus { color: #313131; }*/
-
-#projects h1 {
-   font: 18px/24px 'opensans-bold', sans-serif;
-   text-transform: uppercase;
-   letter-spacing: 1px;
+#projects p {
+   color: #000;
 }
+
+#projects a, #projects a:visited  { color: #0762f9; }
+#projects a:hover, #projects a:focus { color: #313131; }
+
+#projects h2 {
+   font: 22px/30px 'opensans-bold', sans-serif;
+   color: #000000;
+   margin-bottom: 12px;
+}
+
 #projects h1 span {
-   border-bottom: 3px solid #fe6928;
+   border-bottom: 3px solid #000000;
    padding-bottom: 6px;
 }
 #projects h3 {
-   font: 25px/30px 'opensans-bold', sans-serif;
+   font: 20px/30px 'opensans-bold', sans-serif;
 }
 
 #projects .header-col { padding-top: 9px; }
 #projects .main-col { padding-right: 10%; }
 
+.education, .work {
+   margin-bottom: 48px;
+   padding-bottom: 24px;
+   border-bottom: 1px solid #E8E8E8;
+}
 #projects .info {
-   font: 16px/24px 'librebaskerville-italic', serif;
    color: #6E7881;
-   margin-bottom: 18px;
-   margin-top: 9px;
+/*   margin-bottom: 18px;
+   margin-top: 9px;*/
 }
 #projects .info span {
    margin-right: 5px;
@@ -334,17 +343,7 @@ ul#nav li.current a { color: #fe6928; }
 }
 #projects .date {
    font: 15px/24px 'opensans-regular', sans-serif;
-   margin-top: 6px;
-}
-
-@media only screen and (max-width: 767px) {
-    .projects_title {
-        text-align: center;
-    }
-    #projects h1 {
-        letter-spacing: 3px;
-        padding-left: 0;
-    }
+   /*margin-top: 6px;*/
 }
 
 /*----------------------------------------------*/

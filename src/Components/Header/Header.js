@@ -40,6 +40,9 @@ class Header extends Component {
                      <Link smooth to="#experience">Work</Link>
                </li>
                <li>
+                     <Link smooth to="#projects">Projects</Link>
+               </li>
+               <li>
                      <Link smooth to="#bookshelf">Bookshelf</Link>
                </li>
                <li>

@@ -139,47 +139,6 @@
 	justify-content: center;
 }
 
-.cardinal_descr {
-	grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 2;
-	grid-row-end: 3;
-}
-.cardinal_pic {
-	grid-column-start: 3;
-	grid-column-end: 3;
-	grid-row-start: 2;
-	grid-row-end: 3;
-}
-
-.afb_descr {
-	grid-column-start: 2;
-	grid-column-end: 4;
-	grid-row-start: 3;
-	grid-row-end: 4;
-	text-align: right;
-}
-.afb_pic {
-	grid-column-start: 1;
-	grid-column-end: 2;
-	grid-row-start: 3;
-	grid-row-end: 4;
-}
-
-.franks_descr {
-	grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 4;
-	grid-row-end: 4;
-}
-
-.franks_pic {
-	grid-column-start: 3;
-	grid-column-end: 3;
-	grid-row-start: 4;
-	grid-row-end: 4;
-}
-
 @media only screen and (max-width: 810px) {
 	.container2 {
 		display: flex;

@@ -6,7 +6,7 @@ import Header from './Components/Header/Header';
 import Footer from './Components/Contact/Contact';
 import About from './Components/About/About';
 import Work from './Components/Experience/Work';
-import Portfolio2 from './Components/Projects/Projects';
+import Projects from './Components/Projects/Projects';
 import Skills from "./Components/Skills/Skills";
 import Bookshelf from "./Components/Bookshelf/Bookshelf";
 import "tachyons";
@@ -34,21 +34,6 @@ class App extends Component {
 
   }
 
-  /*getResumeData(){
-    $.ajax({
-      url:'./resumeData.json',
-      dataType:'json',
-      cache: false,
-      success: function(data){
-        this.setState({resumeData: data});
-      }.bind(this),
-      error: function(xhr, status, err){
-        console.log(err);
-        alert(err);
-      }
-    });
-  }*/
-
   getFOV() {
     let fov = 0;
     if(window.innerWidth <= 425) {
@@ -73,13 +58,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-            <Header /*data={this.state.resumeData.main}*/ >
-              {/*<Canvas colorManagement camera={{position: [-5, 2, 10], fov:14}}>
-                <ambientLight intensity={1}/>
-                {/*<pointLight position={[-10, 0, -20]} intensity={0.5}/>
-                <pointLight position={[-10, 0, -8]} intensity={0.5}/>
-                <Sphere/>
-              </Canvas>*/}
+            <Header >
               <Canvas colorManagement camera={{position: [-5, 2, 10], fov:this.getFOV()}}>
                 <ambientLight intensity={1}/>
                 {/*<pointLight position={[-10, 0, -20]} intensity={0.5}/>*/}
@@ -87,9 +66,9 @@ class App extends Component {
                 <Sphere/>
               </Canvas>
             </Header>
-            <About /*data={this.state.resumeData.main}*//>
-            {/*<Resume data={this.state.resumeData.resume}/>*/}
-            <Work /*data={this.state.resumeData.resume}*//>
+            <About/>
+            <Work/>
+            <Projects/>
             {/*<Portfolio2 />*/}
             {/*<Skills data={this.state.resumeData.resume} />*/}
             <Bookshelf />

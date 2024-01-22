@@ -24,11 +24,11 @@ class About extends Component {
       </div>
       <div className="row_about container1">
          <div className="abouttext">
-            <p>Software engineer, guitarist.</p>
-            <p>Born in Colombia, raised in Azerbaijan.</p>
+            <p>Software engineer</p>
+            <p>Born in Colombia, raised in Azerbaijan</p>
             <p>Currently: Engineering @ Palantir</p>
             <p>Previously: Engineering @ Bloomberg, CS @ Columbia University</p>
-            <p>Lover of slow walks.</p>
+            <p>Also, music</p>
          </div>
       </div>
    </section>

@@ -20,7 +20,7 @@ class Work extends Component {
               <img src={palantir} />
             </div>
             <div className="box2">
-              <p>Led projects in South Korea & USA in aviation, utilities and heavy industries.</p>
+              <p>Led projects in South Korea & USA in aviation, healthcare, electrical utilities, and heavy industries.</p>
             </div>
           </div>
           <div className="experience work_box br4 ba w-100-l shadow-5 pa4"> {/* change wrapper to work box */}

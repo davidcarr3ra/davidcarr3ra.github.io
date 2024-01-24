@@ -21,10 +21,11 @@ class Projects extends Component {
             </div>
             <div className="box2">
               <p>
-                Airpay, an off-ramp product on Sui and Aptos blockchains. Secured 60k in grant funding from
-                <a href="https://mystenlabs.com/"> Mysten Labs </a>
+                <a href="https://suipiens.com/blog/the-first-12-projects-funded-by-sui-foundation/" target="_blank">Airpay</a>
+                , an off-ramp product on Sui and Aptos blockchains. Secured 60k in grant funding from
+                <a href="https://mystenlabs.com/" target="_blank"> Mysten Labs </a>
                 and
-                <a href="https://martianwallet.xyz/"> Martial Wallet.</a>
+                <a href="https://martianwallet.xyz/" target="_blank"> Martial Wallet.</a>
               </p>
             </div>
           </div>
@@ -34,7 +35,7 @@ class Projects extends Component {
             </div>
             <div className="box2">
               <p>
-                <a href="https://ethglobal.com/showcase/solvify-jq62y">Solvify, </a>
+                <a href="https://ethglobal.com/showcase/solvify-jq62y" target="_blank">Solvify, </a>
                 a chatbot application built during ETH NYC using GPT4 that takes user input and converts it into precise on-chain transactions. 
                 Won prizes from Arbitrum, 1inch, WalletConnect, among others.
               </p>

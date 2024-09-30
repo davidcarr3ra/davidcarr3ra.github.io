@@ -1,28 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.73fe0b45.chunk.css",
-    "main.js": "/static/js/main.e69457bf.chunk.js",
-    "main.js.map": "/static/js/main.e69457bf.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.9150b686.js",
-    "runtime-main.js.map": "/static/js/runtime-main.9150b686.js.map",
-    "static/css/2.a94b31b9.chunk.css": "/static/css/2.a94b31b9.chunk.css",
-    "static/js/2.d824a2f7.chunk.js": "/static/js/2.d824a2f7.chunk.js",
-    "static/js/2.d824a2f7.chunk.js.map": "/static/js/2.d824a2f7.chunk.js.map",
+    "main.css": "/static/css/main.819808a0.css",
+    "main.js": "/static/js/main.77dc2cd5.js",
+    "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
+    "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
+    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
+    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.bb8d5a145e22822103fb.woff2",
+    "static/media/fa-regular-400.ttf": "/static/media/fa-regular-400.17a6e1aebccdbaa39e78.ttf",
+    "static/media/bloomberg.png": "/static/media/bloomberg.54c594c56d0e53a07458.png",
+    "static/media/palantir.png": "/static/media/palantir.b5b51d916f00f8b05736.png",
+    "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.bc3722686635b5f86132.woff2",
+    "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
+    "static/media/ethglobal.svg": "/static/media/ethglobal.3fb5c99af2fe9f344a2822af1d77287d.svg",
+    "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
     "index.html": "/index.html",
-    "precache-manifest.b959251b89687ff012a349da5f54a7e2.js": "/precache-manifest.b959251b89687ff012a349da5f54a7e2.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.a94b31b9.chunk.css.map": "/static/css/2.a94b31b9.chunk.css.map",
-    "static/css/main.73fe0b45.chunk.css.map": "/static/css/main.73fe0b45.chunk.css.map",
-    "static/js/2.d824a2f7.chunk.js.LICENSE.txt": "/static/js/2.d824a2f7.chunk.js.LICENSE.txt",
-    "static/media/bloomberg.png": "/static/media/bloomberg.12e3b08d.png",
-    "static/media/ethglobal.svg": "/static/media/ethglobal.a0c37c69.svg",
-    "static/media/palantir.png": "/static/media/palantir.2d34462b.png"
+    "main.819808a0.css.map": "/static/css/main.819808a0.css.map",
+    "main.77dc2cd5.js.map": "/static/js/main.77dc2cd5.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.9150b686.js",
-    "static/css/2.a94b31b9.chunk.css",
-    "static/js/2.d824a2f7.chunk.js",
-    "static/css/main.73fe0b45.chunk.css",
-    "static/js/main.e69457bf.chunk.js"
+    "static/css/main.819808a0.css",
+    "static/js/main.77dc2cd5.js"
   ]
 }

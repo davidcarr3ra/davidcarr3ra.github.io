@@ -22,10 +22,10 @@ class Projects extends Component {
             <div className="box2">
               <p>
                 <a href="https://suipiens.com/blog/the-first-12-projects-funded-by-sui-foundation/" target="_blank">Airpay</a>
-                , an off-ramp product on Sui and Aptos blockchains. Secured 60k in grant funding from
+                , an off-ramp product on Sui and Aptos blockchains. Backed by 
                 <a href="https://mystenlabs.com/" target="_blank"> Mysten Labs </a>
                 and
-                <a href="https://martianwallet.xyz/" target="_blank"> Martial Wallet.</a>
+                <a href="https://martianwallet.xyz/" target="_blank"> Martian Wallet.</a>
               </p>
             </div>
           </div>

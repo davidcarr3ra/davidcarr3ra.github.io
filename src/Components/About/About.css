@@ -80,7 +80,7 @@
 /* rest */ 
 
 .row_about {
-	width: 94%;
+	width: 30%;
 	max-width: 1135px;
 	margin: 0 auto;
 }
@@ -103,6 +103,10 @@
 }
 
 @media only screen and (max-width: 767px) {
+	.row_about {
+		width: 70%;
+	}
+
 	.container1 {
 		display: flex;
 		flex-direction: column;
@@ -129,5 +133,10 @@
 		margin: 0 auto;
 		margin-top: 20px;
 	}
+}
 
+@media only screen and (max-width: 979px) {
+	.row_about {
+		width: 50%;
+	}
 }

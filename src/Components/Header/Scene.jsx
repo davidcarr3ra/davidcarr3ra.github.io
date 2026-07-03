@@ -5,7 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 function Sphere() {
   const mesh = useRef();
   useFrame(() => {
-    mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
+    mesh.current.rotation.x = mesh.current.rotation.y += 0.007;
   });
   return (
     <mesh ref={mesh}>

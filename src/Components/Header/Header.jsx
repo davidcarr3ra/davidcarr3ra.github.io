@@ -11,7 +11,9 @@ export default function Header({ children }) {
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Work</a></li>
-          <li><a href="#projects">Projects</a></li>
+          {/* DEPRECATED (2026-07-03): Projects section hidden from frontend.
+              Do NOT delete — re-enable alongside <Projects /> in App.jsx. */}
+          {/* <li><a href="#projects">Projects</a></li> */}
           <li><a href="#bookshelf">Bookshelf</a></li>
           <li><a href="#contact">Contact</a></li>
           <li>

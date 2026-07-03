@@ -4,7 +4,11 @@ import './App.css';
 import Header from './Components/Header/Header.jsx';
 import About from './Components/About/About.jsx';
 import Work from './Components/Experience/Work.jsx';
-import Projects from './Components/Projects/Projects.jsx';
+// DEPRECATED (2026-07-03): the Projects section is hidden from the frontend but
+// intentionally kept for future re-enable. Do NOT delete Projects.jsx or this
+// import — to bring the section back, uncomment this line and the <Projects />
+// render below.
+// import Projects from './Components/Projects/Projects.jsx';
 import Bookshelf from './Components/Bookshelf/Bookshelf.jsx';
 import Footer from './Components/Contact/Contact.jsx';
 
@@ -21,7 +25,9 @@ export default function App() {
       </Header>
       <About />
       <Work />
-      <Projects />
+      {/* DEPRECATED (2026-07-03): Projects section hidden from the frontend.
+          Do NOT delete — re-enable by uncommenting this and its import above. */}
+      {/* <Projects /> */}
       <Bookshelf />
       <Footer />
     </div>

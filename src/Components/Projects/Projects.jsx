@@ -1,3 +1,9 @@
+/**
+ * DEPRECATED (2026-07-03): This section is currently hidden from the frontend
+ * (its <Projects /> render is commented out in App.jsx). It is intentionally
+ * kept for future re-enable — DO NOT DELETE this file. To restore the section,
+ * uncomment the import and render in App.jsx.
+ */
 import '../Experience/Work.css'; // reuse the work component's grid styles
 import airpay from '../images/projects/airpay.png';
 import ethglobal from '../images/projects/ethglobal.svg';

@@ -1,5 +1,13 @@
+# dependencies
 node_modules/
-/build
-**/.DS_Store
-images/
 
+# build output
+dist/
+build/
+
+# misc
+**/.DS_Store
+*.local
+.env
+.env.*
+npm-debug.log*

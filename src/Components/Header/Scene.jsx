@@ -24,12 +24,13 @@ function getFOV() {
 }
 
 export default function Scene() {
-  // `flat` disables ACES tone mapping and `decay={0}` restores the
-  // non-attenuating point light, matching the pre-r155 three.js look.
+  // `flat` disables the new ACES tone mapping; `decay={0}` restores the
+  // non-attenuating point light. Light intensities are tuned to match the
+  // original deployed render (dark ~#222 body with a soft highlight).
   return (
     <Canvas flat camera={{ position: [-5, 2, 10], fov: getFOV() }}>
-      <ambientLight intensity={1} />
-      <pointLight position={[-10, 0, -8]} intensity={0.5} decay={0} />
+      <ambientLight intensity={1.5} />
+      <pointLight position={[-10, 0, -8]} intensity={3} decay={0} />
       <Sphere />
     </Canvas>
   );

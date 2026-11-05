@@ -18,8 +18,8 @@ const KNOBS = [
   { key: 'loweredScale', label: 'Sphere size, view open', min: 0.5, max: 1.2, step: 0.01 },
   { key: 'textBias', label: 'Text position in gap', min: 0, max: 1, step: 0.01 },
   { key: 'hoverStrength', label: 'Hover strength', min: -0.4, max: 0.4, step: 0.01 },
-  { key: 'hoverRadius', label: 'Hover radius', min: 0.1, max: 1.2, step: 0.01 },
-  { key: 'hoverSpread', label: 'Hover spread', min: 0, max: 3, step: 0.05 },
+  { key: 'hoverRadius', label: 'Hover radius', min: 0.1, max: 2, step: 0.01 },
+  { key: 'hoverSpread', label: 'Hover spread', min: 0, max: 5, step: 0.05 },
   { key: 'hoverFollow', label: 'Hover follow speed', min: 1, max: 20, step: 0.5 },
   { key: 'hoverWhenOpen', label: 'Hover with view open', min: 0, max: 1, step: 0.05 },
 ];

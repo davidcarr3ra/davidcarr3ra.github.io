@@ -23,10 +23,10 @@ export const TUNE_DEFAULTS = {
   // cursor effect: points under the pointer push out of the surface (a bulge;
   // negative strength presses a dent) and ease back when it moves away
   hoverStrength: 0.2, // displacement at the centre, in sphere units (radius 0.76)
-  hoverRadius: 0.45, // falloff width, as a chord on the unit sphere (0..2)
-  hoverSpread: 2, // how far points also slide sideways, away from the cursor
+  hoverRadius: 1.2, // falloff width, as a chord on the unit sphere (0..2)
+  hoverSpread: 3, // how far points also slide sideways, away from the cursor
   hoverFollow: 7, // 1/s, how quickly the bulge chases the cursor and fades
-  hoverWhenOpen: 0.5, // strength multiplier while a view is open
+  hoverWhenOpen: 1, // strength multiplier while a view is open
 };
 export const tune = { ...TUNE_DEFAULTS };
 

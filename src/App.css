@@ -89,9 +89,10 @@ a:focus-visible {
   display: flex;
   justify-content: center;
   text-align: center;
+  margin-top: 26px;
 }
 .brand h1 {
-  font-size: clamp(24px, 6.4vw, 43px);
+  font-size: clamp(22px, 5.6vw, 36px);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.23em;
@@ -118,24 +119,42 @@ a:focus-visible {
   right: var(--inset-x);
   width: min(48ch, 30vw);
 }
-.view p + ul {
+.panel p + p,
+.panel p + ul {
   margin-top: 1em;
 }
-.view {
-  animation: view-in 0.45s ease both;
+.panel ul {
+  list-style: none;
 }
-@keyframes view-in {
-  from {
+.panel li + li {
+  margin-top: 2px;
+}
+
+/* blinking block caret, shown only while the copy is typing / deleting */
+.caret {
+  display: inline-block;
+  width: 0.5ch;
+  height: 1.05em;
+  margin-left: 1px;
+  background: var(--accent);
+  vertical-align: -0.18em;
+  animation: caret-blink 1s steps(1, end) infinite;
+}
+@keyframes caret-blink {
+  50% {
     opacity: 0;
-    transform: translateY(4px);
   }
 }
 
-.books {
-  list-style: none;
-}
-.books li + li {
-  margin-top: 2px;
+/* visually hidden, for the screen-reader copy of the animated text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .bottom {
@@ -166,11 +185,5 @@ a:focus-visible {
 @media (max-width: 720px) {
   :root {
     --inset-x: 24px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .view {
-    animation: none;
   }
 }

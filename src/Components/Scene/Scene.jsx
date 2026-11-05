@@ -10,7 +10,7 @@ import * as THREE from 'three';
  * normal blending with dark points, and depth fades distant points toward the
  * background (lower alpha) instead of toward black. */
 
-const RADIUS = 0.66; // ≈ the on-screen size of Unfold's cube with the same camera
+const RADIUS = 0.76; // a touch larger than Unfold's cube (~0.66) with the same camera
 const COUNT = 14000;
 const SCATTER_RADIUS = 2.2; // the dust cloud the intro coalesces from
 const INTRO_DUR = 1.6; // seconds

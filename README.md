@@ -23,13 +23,17 @@ npm run deploy    # build and publish dist/ to GitHub Pages
 ```
 src/App.jsx                      overlay: name, nav, copy panel, socials
 src/App.css                      all styles (palette + responsive rules)
+src/content.js                   copy for each view (About, Bookshelf)
+src/Typewriter.jsx               typed view transitions
 src/Components/Scene/Scene.jsx   the particle sphere (lazy-loaded chunk)
-src/Components/Bookshelf/        "Bookshelf" view
 src/Components/Projects/         deprecated; kept for re-enable, not rendered
 ```
 
-Panels are opened by the URL hash (`#bookshelf`; no hash shows just the name
-and sphere), so links, reloads and the back button work without a router.
+Views are opened by the URL hash (`#about`, `#bookshelf`; no hash shows just
+the name and sphere), so links, reloads and the back button work without a
+router. As on unfoldlabs.xyz, switching views deletes the current copy
+character by character and types the new copy in; to edit the copy, change
+`content.js`.
 
 The sphere is ~14k points spread uniformly over a sphere's surface. It uses
 dark points with normal blending (Unfold's additive blending washes out on this

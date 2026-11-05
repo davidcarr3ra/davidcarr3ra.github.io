@@ -15,8 +15,15 @@ npm install
 npm run dev       # vite dev server
 npm run build     # production build to dist/
 npm run preview   # serve the build locally
-npm run deploy    # build and publish dist/ to GitHub Pages
+npm run deploy    # manual publish to gh-pages (normally not needed, see below)
 ```
+
+## Deploy
+
+Merging to `main` deploys: `.github/workflows/deploy.yml` builds the site and
+publishes `dist/` to the `gh-pages` branch, which GitHub Pages serves at
+davidcarr3ra.com. `npm run deploy` does the same from a local checkout; running
+it right after a merge races the workflow and is redundant.
 
 ## Layout
 

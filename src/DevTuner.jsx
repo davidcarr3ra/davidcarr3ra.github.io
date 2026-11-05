@@ -1,6 +1,7 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import './DevTuner.css';
 import {
+  REPLAY_NAME,
   TUNE_DEFAULTS,
   getTuneVersion,
   setTune,
@@ -29,6 +30,8 @@ const KNOBS = [
   { key: 'hoverSpread', label: 'Hover spread', min: 0, max: 5, step: 0.05 },
   { key: 'hoverFollow', label: 'Hover follow speed', min: 1, max: 20, step: 0.5 },
   { key: 'hoverWhenOpen', label: 'Hover with view open', min: 0, max: 1, step: 0.05 },
+  { key: 'nameCps', label: 'Name typing speed', min: 5, max: 200, step: 1 },
+  { key: 'nameDelay', label: 'Name typing delay', min: 0, max: 1000, step: 10 },
 ];
 const HINTS = {
   homeCenter: 'centre, fraction of screen height from top',
@@ -40,6 +43,8 @@ const HINTS = {
   hoverRadius: 'how wide the bulge is',
   hoverSpread: 'sideways push away from the cursor (visible face-on)',
   hoverFollow: 'how quickly it chases the cursor and fades',
+  nameCps: 'letters per second (the name is 13)',
+  nameDelay: 'ms after page load before the first letter',
   hoverWhenOpen: 'multiplier while About / Bookshelf is open',
 };
 
@@ -135,6 +140,7 @@ export default function DevTuner() {
       </div>
       <div className="tuner-actions">
         <button onClick={copy}>{copied ? 'Copied' : 'Copy values'}</button>
+        <button onClick={() => window.dispatchEvent(new Event(REPLAY_NAME))}>Replay name</button>
         <button
           onClick={() => {
             setTune(TUNE_DEFAULTS);

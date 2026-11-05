@@ -28,7 +28,14 @@ export const TUNE_DEFAULTS = {
   hoverSpread: 3, // how far points also slide sideways, away from the cursor
   hoverFollow: 7, // 1/s, how quickly the bulge chases the cursor and fades
   hoverWhenOpen: 1, // strength multiplier while a view is open
+
+  // the name typing itself in on page load (App.jsx)
+  nameCps: 90, // characters/second
+  nameDelay: 50, // ms after the page mounts before the first letter
 };
+
+// Ask the name to type itself in again (dev panel's Replay button).
+export const REPLAY_NAME = 'app:replay-name';
 export const tune = { ...TUNE_DEFAULTS };
 
 let version = 0;

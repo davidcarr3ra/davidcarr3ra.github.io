@@ -4,7 +4,7 @@
  * kept for future re-enable — DO NOT DELETE this file. To restore the section,
  * uncomment the import and render in App.jsx.
  */
-import '../Experience/Work.css'; // reuse the work component's grid styles
+import './ProjectGrid.css'; // grid styles (formerly the Work section's Work.css)
 import airpay from '../images/projects/airpay.png';
 import ethglobal from '../images/projects/ethglobal.svg';
 

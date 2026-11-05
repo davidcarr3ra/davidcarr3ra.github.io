@@ -1,5 +1,3 @@
-import './Bookshelf.css';
-
 const BOOKS = [
   { title: 'Antifragile', author: 'Nassim Taleb' },
   { title: 'Letters from a Stoic', author: 'Seneca' },
@@ -12,27 +10,15 @@ const BOOKS = [
 
 export default function Bookshelf() {
   return (
-    <section id="bookshelf">
-      <div className="row_bookshelf">
-        <div className="bookshelf_title">
-          <h2>BOOKSHELF</h2>
-        </div>
-        <div className="bookshelf_intro">
-          <p>Some books that have influenced me over the years:</p>
-        </div>
-        <div className="books">
-          <ul style={{ listStyleType: 'circle' }}>
-            {BOOKS.map((book) => (
-              <li key={book.title}>
-                <p className="info mb0">
-                  {book.title}
-                  <span>&bull;</span> <em className="author">{book.author}</em>
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
+    <>
+      <p>Some books that have influenced me over the years:</p>
+      <ul className="books">
+        {BOOKS.map((book) => (
+          <li key={book.title}>
+            {book.title} <span className="muted">— {book.author}</span>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

@@ -31,11 +31,17 @@ export const TUNE_DEFAULTS = {
 
   // the name typing itself in on page load (App.jsx)
   nameCps: 42, // characters/second
-  nameDelay: 50, // ms after the page mounts before the first letter
+  nameDelay: 50, // ms after the sphere's first frame before the first letter
 };
 
 // Ask the name to type itself in again (dev panel's Replay button).
 export const REPLAY_NAME = 'app:replay-name';
+
+// The sphere's code is a separate chunk (three.js, ~240KB gzipped), so on a real
+// network it starts a beat after the page. Scene.jsx flags its first frame here
+// so the overlay can start typing in step with the sphere's intro.
+export const SCENE_READY = 'app:scene-ready';
+export const scene = { ready: false };
 export const tune = { ...TUNE_DEFAULTS };
 
 let version = 0;

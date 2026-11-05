@@ -1,4 +1,5 @@
 import {
+  Component,
   lazy,
   Suspense,
   useEffect,
@@ -13,9 +14,11 @@ import { TypedView, useTypeOnce, useTypewriter } from './Typewriter.jsx';
 import {
   PHONE_MAX_WIDTH,
   REPLAY_NAME,
+  SCENE_READY,
   getTuneVersion,
   loweredCenter,
   loweredRadius,
+  scene,
   subscribeTune,
   tune,
 } from './Components/Scene/layout.js';
@@ -133,20 +136,51 @@ function useSphereTop(panel, view, isPhone, tuneVersion) {
 }
 
 // The name types itself in on page load, like the copy on unfoldlabs.xyz, at
-// tune.nameCps after tune.nameDelay ms (layout.js; changing either, or the dev
-// panel's Replay button, types it again). A hidden full copy holds the centred
-// line at its final width, so the letters land in place left to right instead
-// of re-centring as they appear.
+// tune.nameCps, tune.nameDelay ms after the sphere starts (layout.js; changing
+// either, or the dev panel's Replay button, types it again). A hidden full copy
+// holds the centred line at its final width, so the letters land in place left
+// to right instead of re-centring as they appear.
 const NAME = 'David Carrera';
 
-function TypedName() {
+// If the sphere's chunk fails to load (network blip, blocker) or WebGL is
+// unavailable, drop the sphere rather than let the error blank the whole page.
+class SceneBoundary extends Component {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
+// True once the sphere has drawn its first frame, so the name and copy start
+// typing together with its intro rather than ahead of it while its chunk is
+// still downloading. Falls back after SCENE_WAIT ms (slow network, no WebGL).
+const SCENE_WAIT = 1500;
+function useSceneReady() {
+  const [ready, setReady] = useState(scene.ready);
+  useEffect(() => {
+    if (ready) return;
+    const go = () => setReady(true);
+    window.addEventListener(SCENE_READY, go);
+    const timer = setTimeout(go, SCENE_WAIT);
+    return () => {
+      window.removeEventListener(SCENE_READY, go);
+      clearTimeout(timer);
+    };
+  }, [ready]);
+  return ready;
+}
+
+function TypedName({ ready }) {
   const [replay, setReplay] = useState(0);
   useEffect(() => {
     const again = () => setReplay((n) => n + 1);
     window.addEventListener(REPLAY_NAME, again);
     return () => window.removeEventListener(REPLAY_NAME, again);
   }, []);
-  const { chars, caret } = useTypeOnce(NAME, tune.nameCps, tune.nameDelay, replay);
+  const { chars, caret } = useTypeOnce(NAME, tune.nameCps, tune.nameDelay, replay, ready);
   return (
     <h1 className="name">
       <span className="sr-only">{NAME}</span>
@@ -169,7 +203,9 @@ const SOCIALS = [
 
 export default function App() {
   const view = usePathView();
-  const typed = useTypewriter(view);
+  const sceneReady = useSceneReady();
+  // hold a directly loaded view (/about) until the sphere starts, too
+  const typed = useTypewriter(sceneReady ? view : null);
   const isPhone = useMediaQuery(`(max-width: ${PHONE_MAX_WIDTH}px)`);
   const tuneVersion = useSyncExternalStore(subscribeTune, getTuneVersion); // re-render on tuning
   const panel = useRef(null);
@@ -178,9 +214,11 @@ export default function App() {
   return (
     <>
       <div className="scene" aria-hidden="true">
-        <Suspense fallback={null}>
-          <Scene lowered={Boolean(view)} loweredCenter={sphereTop + loweredRadius(isPhone)} />
-        </Suspense>
+        <SceneBoundary>
+          <Suspense fallback={null}>
+            <Scene lowered={Boolean(view)} loweredCenter={sphereTop + loweredRadius(isPhone)} />
+          </Suspense>
+        </SceneBoundary>
       </div>
 
       {/* --sphere-top: where the lowered sphere's top edge sits, so the copy can
@@ -189,7 +227,7 @@ export default function App() {
         <div className="upper">
           <header className="top">
             <a className="brand" {...linkTo(null)}>
-              <TypedName />
+              <TypedName ready={sceneReady} />
             </a>
           </header>
 

@@ -73,14 +73,15 @@ export function useTypewriter(target) {
 }
 
 // Type `text` in once on mount, after `delay` ms: { chars, caret }, the same
-// rAF loop as the view transitions (and as Unfold's on-load typing). It starts
-// over whenever an argument changes; bump `replay` to rerun it as is.
-export function useTypeOnce(text, cps, delay = 0, replay = 0) {
+// rAF loop as the view transitions (and as Unfold's on-load typing). It waits
+// while `enabled` is false, and starts over whenever an argument changes; bump
+// `replay` to rerun it as is.
+export function useTypeOnce(text, cps, delay = 0, replay = 0, enabled = true) {
   const [state, setState] = useState(() =>
     reducedMotion() ? { chars: text.length, caret: false } : { chars: 0, caret: false },
   );
   useEffect(() => {
-    if (reducedMotion()) return;
+    if (reducedMotion() || !enabled) return;
     setState({ chars: 0, caret: false });
     let raf;
     let start;
@@ -96,7 +97,7 @@ export function useTypeOnce(text, cps, delay = 0, replay = 0) {
       clearTimeout(timer);
       cancelAnimationFrame(raf);
     };
-  }, [text, cps, delay, replay]);
+  }, [text, cps, delay, replay, enabled]);
   return state;
 }
 

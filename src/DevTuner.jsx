@@ -44,7 +44,7 @@ const HINTS = {
   hoverSpread: 'sideways push away from the cursor (visible face-on)',
   hoverFollow: 'how quickly it chases the cursor and fades',
   nameCps: 'letters per second (the name is 13)',
-  nameDelay: 'ms after page load before the first letter',
+  nameDelay: 'ms after the sphere appears before the first letter',
   hoverWhenOpen: 'multiplier while About / Bookshelf is open',
 };
 

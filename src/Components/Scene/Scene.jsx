@@ -7,6 +7,8 @@ import {
   PHONE_MAX_WIDTH,
   RADIUS,
   VISIBLE_HEIGHT,
+  SCENE_READY,
+  scene,
   sphereScale,
   tune,
 } from './layout.js';
@@ -223,6 +225,11 @@ function ParticleSphere({ lowered, loweredCenter }) {
   uniforms.uScale.value = size.height * gl.getPixelRatio() * 0.5;
 
   useFrame((state, delta) => {
+    if (!scene.ready) {
+      // first frame: the intro starts now, so let the overlay start typing
+      scene.ready = true;
+      window.dispatchEvent(new Event(SCENE_READY));
+    }
     const dt = Math.min(delta, 0.1); // don't fast-forward the intro after a hidden tab
     uniforms.uTime.value += dt;
 

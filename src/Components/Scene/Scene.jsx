@@ -4,11 +4,11 @@ import * as THREE from 'three';
 import {
   CAMERA_DIST,
   FOV,
-  LOWERED_CENTER,
   PHONE_MAX_WIDTH,
   RADIUS,
   VISIBLE_HEIGHT,
   sphereScale,
+  tune,
 } from './layout.js';
 
 /* Particle sphere, after the particle cube on unfoldlabs.xyz: points spread
@@ -160,7 +160,7 @@ function ParticleSphere({ lowered }) {
     g.rotation.y += dt * SPIN * (reducedMotion ? 0.4 : 1);
     g.rotation.x = g.rotation.y * 0.6; // same diagonal tumble as the old sphere, slower
 
-    const targetY = lowered ? (0.5 - LOWERED_CENTER) * VISIBLE_HEIGHT : 0;
+    const targetY = (0.5 - (lowered ? tune.loweredCenter : tune.homeCenter)) * VISIBLE_HEIGHT;
     const targetScale = sphereScale(size.width <= PHONE_MAX_WIDTH, lowered);
     const ease = (from, to) =>
       reducedMotion ? to : THREE.MathUtils.damp(from, to, MOVE_RATE, dt);

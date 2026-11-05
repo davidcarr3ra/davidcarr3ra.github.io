@@ -1,8 +1,14 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState, useSyncExternalStore } from 'react';
 import './App.css';
 import { VIEWS } from './content.js';
 import { TypedView, useTypewriter } from './Typewriter.jsx';
-import { PHONE_MAX_WIDTH, loweredSphereTop } from './Components/Scene/layout.js';
+import {
+  PHONE_MAX_WIDTH,
+  getTuneVersion,
+  loweredSphereTop,
+  subscribeTune,
+  tune,
+} from './Components/Scene/layout.js';
 // DEPRECATED (2026-07-03): the Projects section is hidden from the frontend but
 // intentionally kept for future re-enable. Do NOT delete Projects.jsx or this
 // import. It was built for the old scrolling layout; to bring it back, port its
@@ -11,6 +17,8 @@ import { PHONE_MAX_WIDTH, loweredSphereTop } from './Components/Scene/layout.js'
 
 // Three.js is heavy; load the particle sphere in a separate chunk.
 const Scene = lazy(() => import('./Components/Scene/Scene.jsx'));
+// layout sliders for local tuning; never part of the production build
+const DevTuner = import.meta.env.DEV ? lazy(() => import('./DevTuner.jsx')) : null;
 
 const RESUME_URL =
   'https://drive.google.com/file/d/1JN7gU383xu9ltaMyEH14Ww9Hq2Hw2Bxg/view?usp=sharing';
@@ -59,6 +67,7 @@ export default function App() {
   const view = useHashView();
   const typed = useTypewriter(view);
   const isPhone = useMediaQuery(`(max-width: ${PHONE_MAX_WIDTH}px)`);
+  useSyncExternalStore(subscribeTune, getTuneVersion); // re-render on tuning changes
 
   return (
     <>
@@ -94,6 +103,9 @@ export default function App() {
             </a>
           </nav>
 
+          {/* the spacers split the free room above and below the copy by
+              tune.textBias (0.5 = equidistant from the name and the sphere) */}
+          <div className="spacer" style={{ flexGrow: tune.textBias }} />
           {/* hidden from screen readers only while it types / deletes, so they read
               the settled copy rather than every keystroke */}
           <main className="panel" aria-hidden={typed.caret || typed.view !== view}>
@@ -106,6 +118,7 @@ export default function App() {
               <TypedView {...typed} />
             </div>
           </main>
+          <div className="spacer" style={{ flexGrow: 1 - tune.textBias }} />
         </div>
 
         <footer className="bottom">
@@ -116,6 +129,12 @@ export default function App() {
           ))}
         </footer>
       </div>
+
+      {DevTuner && (
+        <Suspense fallback={null}>
+          <DevTuner />
+        </Suspense>
+      )}
     </>
   );
 }

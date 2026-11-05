@@ -27,6 +27,7 @@ src/content.js                   copy for each view (About, Bookshelf)
 src/Typewriter.jsx               typed view transitions
 src/Components/Scene/Scene.jsx   the particle sphere (lazy-loaded chunk)
 src/Components/Scene/layout.js   sphere size/placement, shared with the overlay
+src/DevTuner.jsx                 dev-only sliders for the layout values
 src/Components/Projects/         deprecated; kept for re-enable, not rendered
 ```
 
@@ -41,4 +42,6 @@ dark points with normal blending (Unfold's additive blending washes out on this
 light background). Its look is tuned by the `params` object at the top of
 `Scene.jsx`. While a view is open the sphere eases lower and slightly smaller
 to make room for the copy, which centres itself between the name and the
-sphere's top edge (both read the numbers in `layout.js`).
+sphere's top edge (both read the numbers in `layout.js`). Under `npm run dev` a
+tuning panel (bottom right) adjusts those numbers live; copy the values into
+`TUNE_DEFAULTS` to keep them. It is not included in the production build.

@@ -9,8 +9,8 @@ const BOOKS = [
   ['Superintelligence', 'Nick Bostrom'],
   ['Security Analysis', 'Benjamin Graham and David Dodd'],
   ['Deep Work', 'Cal Newport'],
-  ['Finance and the Good Society', 'Robert J. Shiller'],
   ['The Alchemist', 'Paulo Coelho'],
+  ['Steve Jobs', 'Walter Isaacson'],
 ];
 
 export const VIEWS = {

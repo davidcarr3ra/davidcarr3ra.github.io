@@ -1,6 +1,6 @@
 /* Single-screen layout modelled on unfoldlabs.xyz: a full-viewport WebGL canvas
-   with the copy pinned to the corners. Colours are the site's original palette
-   (#ccc ground, black type, orange accent). */
+   with the copy pinned around it. Colours are the site's original palette
+   (#ccc ground, black type, orange accent for the current page). */
 
 @font-face {
   font-family: 'Open Sans';
@@ -52,16 +52,9 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.2s ease;
-}
-/* only on true pointers, so a tap doesn't latch the hover colour on touch */
-@media (hover: hover) {
-  a:hover {
-    color: var(--accent);
-  }
 }
 a:focus-visible {
-  outline: 1px solid var(--accent);
+  outline: 1px solid var(--fg);
   outline-offset: 3px;
 }
 
@@ -84,36 +77,47 @@ a:focus-visible {
   padding: var(--inset-y) var(--inset-x);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   pointer-events: none; /* let the canvas sit behind without blocking */
 }
 .overlay a {
   pointer-events: auto;
 }
 
+/* the name: centred at the top in the original banner's large, wide-tracked
+   uppercase bold */
 .top {
   display: flex;
-  align-items: start;
+  justify-content: center;
+  text-align: center;
 }
-
-/* the name keeps the old banner's uppercase, wide-tracked bold */
 .brand h1 {
-  font-size: 15px;
+  font-size: clamp(24px, 6.4vw, 43px);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.23em;
+  margin-right: -0.23em; /* cancel the trailing tracking so it centres optically */
   line-height: 1.2;
 }
 
-/* swappable copy, top-centre; first line aligns with the name */
-.copy-region {
+/* ---- desktop: nav mid-left, panel mid-right, socials bottom-left ---- */
+.nav {
   position: absolute;
-  left: 50%;
-  top: var(--inset-y);
-  transform: translateX(-50%);
-  width: min(46ch, calc(100% - 2 * var(--inset-x)));
+  top: 40%;
+  left: var(--inset-x);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-.view p + p,
+.nav a[aria-current='page'] {
+  color: var(--accent);
+}
+
+.panel {
+  position: absolute;
+  top: 40%;
+  right: var(--inset-x);
+  width: min(48ch, 30vw);
+}
 .view p + ul {
   margin-top: 1em;
 }
@@ -134,77 +138,34 @@ a:focus-visible {
   margin-top: 2px;
 }
 
-/* ---- mid-left nav ---- */
-.nav {
-  position: absolute;
-  top: 40%;
-  left: var(--inset-x);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.nav a[aria-current='page'] {
-  color: var(--accent);
-}
-
-/* ---- bottom row ---- */
 .bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-}
-.social {
+  margin-top: auto;
   display: flex;
   gap: 22px;
 }
 
-/* ---- tablet and down: nav moves to the top-right row, copy stacks under the
-   name so nothing collides ---- */
+/* ---- tablet and down: everything stacks under the name, centred; the sphere
+   drops lower while the panel is open (Scene.jsx) ---- */
 @media (max-width: 1051px) {
   .overlay {
-    gap: 24px;
-    overflow-y: auto;
-  }
-  .top {
-    justify-content: space-between;
-  }
-  .nav {
-    top: var(--inset-y);
-    right: var(--inset-x);
-    left: auto;
-    flex-direction: row;
     gap: 20px;
   }
-  .copy-region {
+  .nav {
     position: static;
-    transform: none;
-    align-self: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
   }
-  .bottom {
-    margin-top: auto;
+  .panel {
+    position: static;
+    width: min(46ch, 100%);
+    align-self: center;
   }
 }
 
 @media (max-width: 720px) {
   :root {
     --inset-x: 24px;
-  }
-  /* name on its own line, nav beneath it, so both fit a phone width */
-  .nav {
-    position: static;
-    order: -1;
-    margin-top: -12px;
-  }
-  .top {
-    order: -2;
-  }
-  .copy-region {
-    width: 100%;
-  }
-  .bottom {
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 18px;
   }
 }
 

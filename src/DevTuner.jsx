@@ -17,12 +17,22 @@ const KNOBS = [
   { key: 'loweredCenter', label: 'Sphere height, view open', min: 0.5, max: 0.9, step: 0.005 },
   { key: 'loweredScale', label: 'Sphere size, view open', min: 0.5, max: 1.2, step: 0.01 },
   { key: 'textBias', label: 'Text position in gap', min: 0, max: 1, step: 0.01 },
+  { key: 'hoverStrength', label: 'Hover strength', min: -0.4, max: 0.4, step: 0.01 },
+  { key: 'hoverRadius', label: 'Hover radius', min: 0.1, max: 1.2, step: 0.01 },
+  { key: 'hoverSpread', label: 'Hover spread', min: 0, max: 3, step: 0.05 },
+  { key: 'hoverFollow', label: 'Hover follow speed', min: 1, max: 20, step: 0.5 },
+  { key: 'hoverWhenOpen', label: 'Hover with view open', min: 0, max: 1, step: 0.05 },
 ];
 const HINTS = {
   homeCenter: 'centre, fraction of screen height from top',
   loweredCenter: 'centre, fraction of screen height from top',
   loweredScale: '1 = same size as home',
   textBias: '0 = under name · 0.5 = equidistant · 1 = on sphere',
+  hoverStrength: '+ bulges out · − presses a dent · 0 = off',
+  hoverRadius: 'how wide the bulge is',
+  hoverSpread: 'sideways push away from the cursor (visible face-on)',
+  hoverFollow: 'how quickly it chases the cursor and fades',
+  hoverWhenOpen: 'multiplier while About / Bookshelf is open',
 };
 
 const STORE = 'dev-tune';

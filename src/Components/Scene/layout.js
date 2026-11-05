@@ -19,6 +19,14 @@ export const TUNE_DEFAULTS = {
   loweredCenter: 0.63, // sphere centre while a view is open
   loweredScale: 0.88, // sphere size while a view is open (1 = home size)
   textBias: 0.52, // where the copy sits in the gap: 0 = under the name, 1 = on the sphere
+
+  // cursor effect: points under the pointer push out of the surface (a bulge;
+  // negative strength presses a dent) and ease back when it moves away
+  hoverStrength: 0.2, // displacement at the centre, in sphere units (radius 0.76)
+  hoverRadius: 0.45, // falloff width, as a chord on the unit sphere (0..2)
+  hoverSpread: 2, // how far points also slide sideways, away from the cursor
+  hoverFollow: 7, // 1/s, how quickly the bulge chases the cursor and fades
+  hoverWhenOpen: 0.5, // strength multiplier while a view is open
 };
 export const tune = { ...TUNE_DEFAULTS };
 

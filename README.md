@@ -44,6 +44,10 @@ light background). Its look is tuned by the `params` object at the top of
 to make room for the copy, which centres itself between the name and the
 sphere's top edge (both read the numbers in `layout.js`). If the copy is too
 tall for that room (short screens, the Bookshelf list) the sphere drops just
-far enough to clear it. Under `npm run dev` a
+far enough to clear it.
+
+Under the cursor the sphere's points lift and slide apart (a vertex-shader
+effect driven by an analytic ray–sphere hit; touch counts only while pressed).
+Its strength, width, spread and speed are in `TUNE_DEFAULTS` and the dev panel. Under `npm run dev` a
 tuning panel (bottom right) adjusts those numbers live; copy the values into
 `TUNE_DEFAULTS` to keep them. It is not included in the production build.

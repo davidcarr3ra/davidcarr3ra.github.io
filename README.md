@@ -38,7 +38,8 @@ the back button works. GitHub Pages has no rewrites, so the build also writes
 the app for any path; those pages return HTTP 404 to crawlers, which is fine
 for a one-screen site. Old `#about` links redirect to `/about`. As on
 unfoldlabs.xyz, switching views deletes the current copy character by character
-and types the new copy in; to edit the copy, change `content.js`.
+and types the new copy in; to edit the copy, change `content.js`. The name at the
+top types itself in the same way on page load (`TypedName` in `App.jsx`).
 
 The sphere is ~14k points spread uniformly over a sphere's surface. It uses
 dark points with normal blending (Unfold's additive blending washes out on this

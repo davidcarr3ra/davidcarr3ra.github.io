@@ -72,6 +72,32 @@ export function useTypewriter(target) {
   return state;
 }
 
+// Type `text` in once on mount, after `delay` ms: { chars, caret }, the same
+// rAF loop as the view transitions (and as Unfold's on-load typing).
+export function useTypeOnce(text, cps, delay = 0) {
+  const [state, setState] = useState(() =>
+    reducedMotion() ? { chars: text.length, caret: false } : { chars: 0, caret: false },
+  );
+  useEffect(() => {
+    if (reducedMotion()) return;
+    let raf;
+    let start;
+    const tick = (ts) => {
+      start ??= ts;
+      const chars = Math.min(text.length, Math.floor(((ts - start) / 1000) * cps));
+      const done = chars === text.length;
+      setState({ chars, caret: !done }); // caret off on the final frame
+      if (!done) raf = requestAnimationFrame(tick);
+    };
+    const timer = setTimeout(() => (raf = requestAnimationFrame(tick)), delay);
+    return () => {
+      clearTimeout(timer);
+      cancelAnimationFrame(raf);
+    };
+  }, [text, cps, delay]);
+  return state;
+}
+
 // Render the first `chars` characters of a view, with the caret at the end.
 export function TypedView({ view, chars, caret }) {
   if (!view) return null;

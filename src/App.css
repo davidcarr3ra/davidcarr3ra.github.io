@@ -62,6 +62,15 @@ a:focus-visible {
   color: var(--muted);
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ---- canvas ---- */
 .scene {
   position: fixed;
@@ -112,13 +121,25 @@ a:focus-visible {
   text-align: center;
   margin-top: 26px;
 }
-.brand h1 {
+.brand .name {
   font-size: clamp(22px, 5.6vw, 36px);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.23em;
   margin-right: -0.23em; /* cancel the trailing tracking so it centres optically */
   line-height: 1.2;
+  display: grid; /* the typed letters sit over the hidden full-width copy */
+}
+.name-sizer,
+.name-typed {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+.name-sizer {
+  visibility: hidden;
+}
+.name-typed {
+  text-align: left; /* grow left to right from where the full name starts */
 }
 
 /* ---- desktop: nav mid-left, socials bottom-centre ---- */

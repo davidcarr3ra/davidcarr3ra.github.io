@@ -9,7 +9,7 @@ import {
 } from 'react';
 import './App.css';
 import { VIEWS } from './content.js';
-import { TypedView, useTypewriter } from './Typewriter.jsx';
+import { TypedView, useTypeOnce, useTypewriter } from './Typewriter.jsx';
 import {
   PHONE_MAX_WIDTH,
   getTuneVersion,
@@ -130,6 +130,30 @@ function useSphereTop(panel, view, isPhone, tuneVersion) {
   return Math.max(tunedTop, fitTop);
 }
 
+// The name types itself in on page load, like the copy on unfoldlabs.xyz. Slower
+// than the copy (which runs at 220 cps): at that speed 13 letters would be
+// instant. A hidden full copy holds the centred line at its final width, so the
+// letters land in place left to right instead of re-centring as they appear.
+const NAME = 'David Carrera';
+const NAME_CPS = 18;
+const NAME_DELAY = 250; // ms after mount
+
+function TypedName() {
+  const { chars, caret } = useTypeOnce(NAME, NAME_CPS, NAME_DELAY);
+  return (
+    <h1 className="name">
+      <span className="sr-only">{NAME}</span>
+      <span className="name-sizer" aria-hidden="true">
+        {NAME}
+      </span>
+      <span className="name-typed" aria-hidden="true">
+        {NAME.slice(0, chars)}
+        {caret && <span className="caret" />}
+      </span>
+    </h1>
+  );
+}
+
 const SOCIALS = [
   { label: 'X', href: 'https://twitter.com/davidcarr3ra' },
   { label: 'GitHub', href: 'https://github.com/davidcarr3ra' },
@@ -158,7 +182,7 @@ export default function App() {
         <div className="upper">
           <header className="top">
             <a className="brand" {...linkTo(null)}>
-              <h1>David Carrera</h1>
+              <TypedName />
             </a>
           </header>
 

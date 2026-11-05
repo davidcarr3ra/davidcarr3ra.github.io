@@ -135,7 +135,7 @@ function useSphereTop(panel, view, isPhone, tuneVersion) {
 // instant. A hidden full copy holds the centred line at its final width, so the
 // letters land in place left to right instead of re-centring as they appear.
 const NAME = 'David Carrera';
-const NAME_CPS = 18;
+const NAME_CPS = 32;
 const NAME_DELAY = 250; // ms after mount
 
 function TypedName() {

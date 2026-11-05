@@ -30,7 +30,7 @@ export const TUNE_DEFAULTS = {
   hoverWhenOpen: 1, // strength multiplier while a view is open
 
   // the name typing itself in on page load (App.jsx)
-  nameCps: 90, // characters/second
+  nameCps: 42, // characters/second
   nameDelay: 50, // ms after the page mounts before the first letter
 };
 

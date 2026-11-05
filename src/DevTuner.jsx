@@ -15,6 +15,13 @@ import {
 const KNOBS = [
   { key: 'homeCenter', label: 'Sphere height, home', min: 0.3, max: 0.7, step: 0.005 },
   { key: 'loweredCenter', label: 'Sphere height, view open', min: 0.5, max: 0.9, step: 0.005 },
+  {
+    key: 'phoneLoweredCenter',
+    label: 'Sphere height, view open, phone',
+    min: 0.5,
+    max: 0.9,
+    step: 0.005,
+  },
   { key: 'loweredScale', label: 'Sphere size, view open', min: 0.5, max: 1.2, step: 0.01 },
   { key: 'textBias', label: 'Text position in gap', min: 0, max: 1, step: 0.01 },
   { key: 'hoverStrength', label: 'Hover strength', min: -0.4, max: 0.4, step: 0.01 },
@@ -26,6 +33,7 @@ const KNOBS = [
 const HINTS = {
   homeCenter: 'centre, fraction of screen height from top',
   loweredCenter: 'centre, fraction of screen height from top',
+  phoneLoweredCenter: 'same, on screens ≤ 720px wide',
   loweredScale: '1 = same size as home',
   textBias: '0 = under name · 0.5 = equidistant · 1 = on sphere',
   hoverStrength: '+ bulges out · − presses a dent · 0 = off',

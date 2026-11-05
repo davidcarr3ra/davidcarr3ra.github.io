@@ -13,6 +13,7 @@ import { TypedView, useTypewriter } from './Typewriter.jsx';
 import {
   PHONE_MAX_WIDTH,
   getTuneVersion,
+  loweredCenter,
   loweredRadius,
   subscribeTune,
   tune,
@@ -69,7 +70,7 @@ function useMediaQuery(query) {
 // height: the tuned spot, or lower if the copy wouldn't fit above it (short
 // screens, long views), so the copy never overlaps the sphere.
 function useSphereTop(panel, view, isPhone, tuneVersion) {
-  const tunedTop = tune.loweredCenter - loweredRadius(isPhone);
+  const tunedTop = loweredCenter(isPhone) - loweredRadius(isPhone);
   const [fitTop, setFitTop] = useState(0);
   useLayoutEffect(() => {
     const measure = () => {

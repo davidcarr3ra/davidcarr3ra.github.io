@@ -1,1 +1,235 @@
+/* Single-screen layout modelled on unfoldlabs.xyz: a full-viewport WebGL canvas
+   with the name and copy centred at the top and the nav pinned to the side.
+   Colours are the site's original palette (#ccc ground, black type). */
 
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans-Regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans-Bold-webfont.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --bg: #ccc;
+  --fg: #111;
+  --muted: #555;
+  --font: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --inset-x: 40px;
+  --inset-y: 34px;
+  --gap-y: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; /* the canvas fills the viewport; nothing scrolls */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- canvas ---- */
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* ---- overlay ---- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  padding: var(--inset-y) var(--inset-x);
+  display: flex;
+  flex-direction: column;
+  pointer-events: none; /* let the canvas sit behind without blocking */
+}
+.overlay a {
+  pointer-events: auto;
+}
+
+/* everything above the lowered sphere: the name, the nav (on narrow screens)
+   and the copy panel, which sits in whatever room is left, by default
+   equidistant from the name (or nav) above and the sphere's top edge below.
+   Absolute, so its height is a fraction of the full viewport like the canvas;
+   --sphere-top is set from the scene's own layout values (layout.js). */
+.upper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--sphere-top) * 100%);
+  padding: var(--inset-y) var(--inset-x) 0;
+  display: flex;
+  flex-direction: column;
+}
+/* the free room above / below the copy; each keeps a minimum clearance and
+   grows by its share (flex-grow, set from tune.textBias in App.jsx) */
+.spacer {
+  flex: 0 0 var(--gap-y);
+}
+
+/* the name: centred at the top in the original banner's large, wide-tracked
+   uppercase bold */
+.top {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 26px;
+}
+.brand .name {
+  font-size: clamp(22px, 5.6vw, 36px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.23em;
+  margin-right: -0.23em; /* cancel the trailing tracking so it centres optically */
+  line-height: 1.2;
+  display: grid; /* the typed letters sit over the hidden full-width copy */
+}
+.name-sizer,
+.name-typed {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+.name-sizer {
+  visibility: hidden;
+}
+.name-typed {
+  text-align: left; /* grow left to right from where the full name starts */
+}
+
+/* ---- desktop: nav mid-left, socials bottom-centre ---- */
+.nav {
+  position: absolute;
+  top: 40vh; /* of the viewport, not .upper */
+  left: var(--inset-x);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* the copy panel: centred under the name, like Unfold's top-centre copy region.
+   Fixed width, and a hidden full copy stacked under the typed one in the same
+   grid cell, so the box keeps its final size while text types in. While it is
+   open the sphere eases lower to make room (Scene.jsx). */
+.panel {
+  align-self: center;
+  width: min(56ch, 100%);
+  flex-shrink: 0;
+  display: grid;
+}
+.panel-sizer,
+.panel-text {
+  grid-area: 1 / 1;
+}
+.panel-sizer {
+  visibility: hidden;
+}
+.panel p + p,
+.panel p + ul {
+  margin-top: 1em;
+}
+.panel ul {
+  list-style: none;
+}
+.panel li + li {
+  margin-top: 2px;
+}
+
+/* blinking block caret, shown only while the copy is typing / deleting */
+.caret {
+  display: inline-block;
+  width: 0.5ch;
+  height: 1.05em;
+  margin-left: 1px;
+  background: var(--fg);
+  vertical-align: -0.18em;
+  animation: caret-blink 1s steps(1, end) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* inline links in the copy (the About client names): a faint underline so
+   they're discoverable, full strength on hover */
+.panel a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--fg) 35%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.2s ease;
+}
+@media (hover: hover) {
+  .panel a:hover {
+    text-decoration-color: var(--fg);
+  }
+}
+
+.bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+}
+
+/* ---- tablet and down: the nav moves to a centred row under the name ---- */
+@media (max-width: 1051px) {
+  .nav {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-top: var(--gap-y);
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --inset-x: 24px;
+  }
+}

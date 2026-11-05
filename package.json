@@ -1,49 +1,24 @@
 {
-  "name": "my_website",
-  "version": "0.1.0",
-  "homepage": "https://davidcarr3ra.github.io/",
+  "name": "personal-website",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.6.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "array.prototype.reduce": "^1.0.6",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^6.4.3",
-    "react-router-hash-link": "^2.4.3",
-    "react-scripts": "^5.0.1",
-    "react-three-fiber": "^4.2.20",
-    "tachyons": "^4.12.0",
-    "three": "^0.119.1"
-  },
+  "type": "module",
+  "description": "David Carrera — personal website",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d dist"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@react-three/fiber": "^9.6.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "three": "^0.185.1"
   },
   "devDependencies": {
-    "gh-pages": "^3.2.3",
-    "install": "^0.13.0",
-    "npm": "^6.14.8"
+    "@vitejs/plugin-react": "^6.0.3",
+    "gh-pages": "^6.3.0",
+    "vite": "^8.1.3"
   }
 }

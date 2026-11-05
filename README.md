@@ -1,68 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# davidcarr3ra.com
 
-## Available Scripts
+Personal site. A single screen: the name at the top, a slowly turning particle
+sphere in the middle, and a nav that types copy in under the name (layout
+modelled on [unfoldlabs.xyz](https://unfoldlabs.xyz)).
 
-In the project directory, you can run:
+## Stack
 
-### `npm start`
+Vite · React 19 · three.js via @react-three/fiber (custom point shader).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Develop
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```bash
+npm install
+npm run dev       # vite dev server
+npm run build     # production build to dist/
+npm run preview   # serve the build locally
+npm run deploy    # build and publish dist/ to GitHub Pages
+```
 
-### `npm test`
+## Layout
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/App.jsx                      overlay: name, nav, copy panel, socials
+src/App.css                      all styles (palette + responsive rules)
+src/content.js                   copy for each view (About, Bookshelf)
+src/Typewriter.jsx               typed view transitions
+src/Components/Scene/Scene.jsx   the particle sphere (lazy-loaded chunk)
+src/Components/Scene/layout.js   sphere size/placement, shared with the overlay
+src/DevTuner.jsx                 dev-only sliders for the layout values
+src/Components/Projects/         deprecated; kept for re-enable, not rendered
+```
 
-### `npm run build`
+Views are opened by the URL path (`/about`, `/bookshelf`; `/` shows just the
+name and sphere), switched with the History API so the page never reloads, and
+the back button works. GitHub Pages has no rewrites, so the build also writes
+`dist/404.html` (a copy of `index.html`, see `vite.config.js`) and Pages serves
+the app for any path; those pages return HTTP 404 to crawlers, which is fine
+for a one-screen site. Old `#about` links redirect to `/about`. As on
+unfoldlabs.xyz, switching views deletes the current copy character by character
+and types the new copy in; to edit the copy, change `content.js`. The name at the
+top types itself in the same way on page load (`TypedName` in `App.jsx`); its
+speed and delay are `nameCps` / `nameDelay` in `TUNE_DEFAULTS`, with sliders and
+a Replay button in the dev panel.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The sphere is ~14k points spread uniformly over a sphere's surface. It uses
+dark points with normal blending (Unfold's additive blending washes out on this
+light background). Its look is tuned by the `params` object at the top of
+`Scene.jsx`. While a view is open the sphere eases lower and slightly smaller
+to make room for the copy, which centres itself between the name and the
+sphere's top edge (both read the numbers in `layout.js`). If the copy is too
+tall for that room (short screens, the Bookshelf list) the sphere drops just
+far enough to clear it.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Under the cursor the sphere's points lift and slide apart (a vertex-shader
+effect driven by an analytic ray–sphere hit; touch counts only while pressed).
+Its strength, width, spread and speed are in `TUNE_DEFAULTS` and the dev panel. Under `npm run dev` a
+tuning panel (bottom right) adjusts those numbers live; copy the values into
+`TUNE_DEFAULTS` to keep them. It is not included in the production build.

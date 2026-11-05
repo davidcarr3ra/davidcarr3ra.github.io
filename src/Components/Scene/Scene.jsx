@@ -1,6 +1,15 @@
 import { useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import {
+  CAMERA_DIST,
+  FOV,
+  LOWERED_CENTER,
+  PHONE_MAX_WIDTH,
+  RADIUS,
+  VISIBLE_HEIGHT,
+  sphereScale,
+} from './layout.js';
 
 /* Particle sphere, after the particle cube on unfoldlabs.xyz: points spread
  * uniformly over a sphere's surface.
@@ -10,24 +19,10 @@ import * as THREE from 'three';
  * normal blending with dark points, and depth fades distant points toward the
  * background (lower alpha) instead of toward black. */
 
-const RADIUS = 0.76; // a touch larger than Unfold's cube (~0.66) with the same camera
 const COUNT = 14000;
 const SCATTER_RADIUS = 2.2; // the dust cloud the intro coalesces from
 const INTRO_DUR = 1.6; // seconds
 const SPIN = 0.25; // rad/s about the tilted axis
-
-const CAMERA_DIST = 6.9; // Unfold: fov 38 at ~6.9 units
-const FOV = 38;
-const VISIBLE_HEIGHT = 2 * CAMERA_DIST * Math.tan(THREE.MathUtils.degToRad(FOV / 2));
-
-// The copy panel runs down from under the name, so while it is showing the
-// sphere eases into the lower half (centre at 68% of the height) and shrinks a
-// little, like the cube dropping lower on Unfold's about page. Phones also get a
-// slightly smaller sphere overall.
-const LOWERED_CENTER = 0.68;
-const LOWERED_SCALE = 0.88;
-const PHONE_MAX_WIDTH = 720;
-const PHONE_SCALE = 0.8;
 const MOVE_RATE = 4; // 1/s, exponential ease toward the target position
 
 const params = {
@@ -166,8 +161,7 @@ function ParticleSphere({ lowered }) {
     g.rotation.x = g.rotation.y * 0.6; // same diagonal tumble as the old sphere, slower
 
     const targetY = lowered ? (0.5 - LOWERED_CENTER) * VISIBLE_HEIGHT : 0;
-    const targetScale =
-      (size.width <= PHONE_MAX_WIDTH ? PHONE_SCALE : 1) * (lowered ? LOWERED_SCALE : 1);
+    const targetScale = sphereScale(size.width <= PHONE_MAX_WIDTH, lowered);
     const ease = (from, to) =>
       reducedMotion ? to : THREE.MathUtils.damp(from, to, MOVE_RATE, dt);
     g.position.y = ease(g.position.y, targetY);

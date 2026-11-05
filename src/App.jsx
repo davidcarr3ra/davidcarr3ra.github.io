@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import './App.css';
 import { VIEWS } from './content.js';
 import { TypedView, useTypewriter } from './Typewriter.jsx';
+import { PHONE_MAX_WIDTH, loweredSphereTop } from './Components/Scene/layout.js';
 // DEPRECATED (2026-07-03): the Projects section is hidden from the frontend but
 // intentionally kept for future re-enable. Do NOT delete Projects.jsx or this
 // import. It was built for the old scrolling layout; to bring it back, port its
@@ -37,6 +38,17 @@ function useHashView() {
   return view;
 }
 
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const onChange = () => setMatches(mql.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, [query]);
+  return matches;
+}
+
 const SOCIALS = [
   { label: 'X', href: 'https://twitter.com/davidcarr3ra' },
   { label: 'GitHub', href: 'https://github.com/davidcarr3ra' },
@@ -46,6 +58,7 @@ const SOCIALS = [
 export default function App() {
   const view = useHashView();
   const typed = useTypewriter(view);
+  const isPhone = useMediaQuery(`(max-width: ${PHONE_MAX_WIDTH}px)`);
 
   return (
     <>
@@ -55,34 +68,45 @@ export default function App() {
         </Suspense>
       </div>
 
-      <div className="overlay">
-        <header className="top">
-          <a className="brand" href="#">
-            <h1>David Carrera</h1>
-          </a>
-        </header>
-
-        <nav className="nav" aria-label="Primary">
-          {NAV.map(({ key, label }) => (
-            // toggles: clicking the open view's link closes it
-            <a
-              key={key}
-              href={view === key ? '#' : `#${key}`}
-              aria-current={view === key ? 'page' : undefined}
-            >
-              {label}
+      {/* --sphere-top: where the lowered sphere's top edge sits, so the copy can
+          centre itself between the name and the sphere */}
+      <div className="overlay" style={{ '--sphere-top': loweredSphereTop(isPhone) }}>
+        <div className="upper">
+          <header className="top">
+            <a className="brand" href="#">
+              <h1>David Carrera</h1>
             </a>
-          ))}
-          <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
-            Résumé
-          </a>
-        </nav>
+          </header>
 
-        {/* hidden from screen readers only while it types / deletes, so they read
-            the settled copy rather than every keystroke */}
-        <main className="panel" aria-hidden={typed.caret || typed.view !== view}>
-          <TypedView {...typed} />
-        </main>
+          <nav className="nav" aria-label="Primary">
+            {NAV.map(({ key, label }) => (
+              // toggles: clicking the open view's link closes it
+              <a
+                key={key}
+                href={view === key ? '#' : `#${key}`}
+                aria-current={view === key ? 'page' : undefined}
+              >
+                {label}
+              </a>
+            ))}
+            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+              Résumé
+            </a>
+          </nav>
+
+          {/* hidden from screen readers only while it types / deletes, so they read
+              the settled copy rather than every keystroke */}
+          <main className="panel" aria-hidden={typed.caret || typed.view !== view}>
+            {/* invisible full copy of the showing view: holds the panel at its
+                final height so the centred box doesn't drift as text types in */}
+            <div className="panel-sizer" aria-hidden="true">
+              <TypedView view={typed.view} chars={Infinity} caret={false} />
+            </div>
+            <div className="panel-text">
+              <TypedView {...typed} />
+            </div>
+          </main>
+        </div>
 
         <footer className="bottom">
           {SOCIALS.map(({ label, href }) => (

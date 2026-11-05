@@ -20,7 +20,7 @@ export const VIEWS = {
       parts: [
         {
           text:
-            'David Carrera was a technical lead at Palantir Technologies. At Palantir, he ' +
+            'David Carrera is a former technical lead at Palantir Technologies, where he ' +
             'led AI deployments for enterprise clients across the US and South Korea, ' +
             'including ',
         },
@@ -36,6 +36,7 @@ export const VIEWS = {
         },
       ],
     },
+    { type: 'p', parts: [{ text: 'Currently working on something new.' }] },
   ],
   bookshelf: [
     { type: 'p', parts: [{ text: 'Some books that have influenced me over the years:' }] },

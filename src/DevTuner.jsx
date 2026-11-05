@@ -1,10 +1,8 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import './DevTuner.css';
 import {
-  PHONE_MAX_WIDTH,
   TUNE_DEFAULTS,
   getTuneVersion,
-  loweredSphereTop,
   setTune,
   subscribeTune,
   tune,
@@ -49,7 +47,8 @@ function measure() {
   const narrow = window.innerWidth <= 1051;
   const above = document.querySelector(narrow ? '.nav' : '.top').getBoundingClientRect().bottom;
   const p = panel.getBoundingClientRect();
-  const sphereTop = loweredSphereTop(window.innerWidth <= PHONE_MAX_WIDTH) * window.innerHeight;
+  const overlay = document.querySelector('.overlay');
+  const sphereTop = parseFloat(overlay.style.getPropertyValue('--sphere-top')) * window.innerHeight;
   return { above: Math.round(p.top - above), below: Math.round(sphereTop - p.bottom) };
 }
 

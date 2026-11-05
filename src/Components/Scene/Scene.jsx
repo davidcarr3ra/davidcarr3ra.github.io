@@ -110,7 +110,7 @@ function buildGeometry() {
 
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
-function ParticleSphere({ lowered }) {
+function ParticleSphere({ lowered, loweredCenter }) {
   const points = useRef();
   const intro = useRef(reducedMotion ? 1 : 0);
   const { gl, size } = useThree();
@@ -160,7 +160,7 @@ function ParticleSphere({ lowered }) {
     g.rotation.y += dt * SPIN * (reducedMotion ? 0.4 : 1);
     g.rotation.x = g.rotation.y * 0.6; // same diagonal tumble as the old sphere, slower
 
-    const targetY = (0.5 - (lowered ? tune.loweredCenter : tune.homeCenter)) * VISIBLE_HEIGHT;
+    const targetY = (0.5 - (lowered ? loweredCenter : tune.homeCenter)) * VISIBLE_HEIGHT;
     const targetScale = sphereScale(size.width <= PHONE_MAX_WIDTH, lowered);
     const ease = (from, to) =>
       reducedMotion ? to : THREE.MathUtils.damp(from, to, MOVE_RATE, dt);
@@ -171,7 +171,7 @@ function ParticleSphere({ lowered }) {
   return <points ref={points} geometry={geometry} material={material} />;
 }
 
-export default function Scene({ lowered = false }) {
+export default function Scene({ lowered = false, loweredCenter = tune.loweredCenter }) {
   return (
     <Canvas
       flat
@@ -179,7 +179,7 @@ export default function Scene({ lowered = false }) {
       gl={{ antialias: true, alpha: true }}
       camera={{ position: [0, 0, CAMERA_DIST], fov: FOV, near: 0.1, far: 100 }}
     >
-      <ParticleSphere lowered={lowered} />
+      <ParticleSphere lowered={lowered} loweredCenter={loweredCenter} />
     </Canvas>
   );
 }

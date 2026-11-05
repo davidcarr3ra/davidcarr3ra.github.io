@@ -1,11 +1,19 @@
-import { lazy, Suspense, useEffect, useState, useSyncExternalStore } from 'react';
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import './App.css';
 import { VIEWS } from './content.js';
 import { TypedView, useTypewriter } from './Typewriter.jsx';
 import {
   PHONE_MAX_WIDTH,
   getTuneVersion,
-  loweredSphereTop,
+  loweredRadius,
   subscribeTune,
   tune,
 } from './Components/Scene/layout.js';
@@ -57,6 +65,30 @@ function useMediaQuery(query) {
   return matches;
 }
 
+// Where the open-view sphere's top edge goes, as a fraction of the viewport
+// height: the tuned spot, or lower if the copy wouldn't fit above it (short
+// screens, long views), so the copy never overlaps the sphere.
+function useSphereTop(panel, view, isPhone, tuneVersion) {
+  const tunedTop = tune.loweredCenter - loweredRadius(isPhone);
+  const [fitTop, setFitTop] = useState(0);
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = panel.current;
+      if (!el || !view) return setFitTop(0);
+      // the panel's height doesn't depend on the sphere, and neither does
+      // what sits above it, so this can't feed back into itself
+      const above = el.parentElement.querySelector(window.innerWidth <= 1051 ? '.nav' : '.top');
+      const gap = parseFloat(getComputedStyle(el).getPropertyValue('--gap-y')) || 0;
+      const needed = above.getBoundingClientRect().bottom + 2 * gap + el.offsetHeight;
+      setFitTop(needed / window.innerHeight);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [panel, view, isPhone, tuneVersion]);
+  return Math.max(tunedTop, fitTop);
+}
+
 const SOCIALS = [
   { label: 'X', href: 'https://twitter.com/davidcarr3ra' },
   { label: 'GitHub', href: 'https://github.com/davidcarr3ra' },
@@ -67,19 +99,21 @@ export default function App() {
   const view = useHashView();
   const typed = useTypewriter(view);
   const isPhone = useMediaQuery(`(max-width: ${PHONE_MAX_WIDTH}px)`);
-  useSyncExternalStore(subscribeTune, getTuneVersion); // re-render on tuning changes
+  const tuneVersion = useSyncExternalStore(subscribeTune, getTuneVersion); // re-render on tuning
+  const panel = useRef(null);
+  const sphereTop = useSphereTop(panel, typed.view, isPhone, tuneVersion);
 
   return (
     <>
       <div className="scene" aria-hidden="true">
         <Suspense fallback={null}>
-          <Scene lowered={Boolean(view)} />
+          <Scene lowered={Boolean(view)} loweredCenter={sphereTop + loweredRadius(isPhone)} />
         </Suspense>
       </div>
 
       {/* --sphere-top: where the lowered sphere's top edge sits, so the copy can
           centre itself between the name and the sphere */}
-      <div className="overlay" style={{ '--sphere-top': loweredSphereTop(isPhone) }}>
+      <div className="overlay" style={{ '--sphere-top': sphereTop }}>
         <div className="upper">
           <header className="top">
             <a className="brand" href="#">
@@ -108,7 +142,7 @@ export default function App() {
           <div className="spacer" style={{ flexGrow: tune.textBias }} />
           {/* hidden from screen readers only while it types / deletes, so they read
               the settled copy rather than every keystroke */}
-          <main className="panel" aria-hidden={typed.caret || typed.view !== view}>
+          <main ref={panel} className="panel" aria-hidden={typed.caret || typed.view !== view}>
             {/* invisible full copy of the showing view: holds the panel at its
                 final height so the centred box doesn't drift as text types in */}
             <div className="panel-sizer" aria-hidden="true">

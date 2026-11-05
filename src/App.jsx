@@ -30,7 +30,7 @@ const Scene = lazy(() => import('./Components/Scene/Scene.jsx'));
 const DevTuner = import.meta.env.DEV ? lazy(() => import('./DevTuner.jsx')) : null;
 
 const RESUME_URL =
-  'https://drive.google.com/file/d/1JN7gU383xu9ltaMyEH14Ww9Hq2Hw2Bxg/view?usp=sharing';
+  'https://drive.google.com/file/d/1YU0IWb3xLywHCHGLs0YSm47iU9_CeCOF/view';
 
 const NAV = [
   { key: 'about', label: 'About' },

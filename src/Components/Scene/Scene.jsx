@@ -20,11 +20,12 @@ const CAMERA_DIST = 6.9; // Unfold: fov 38 at ~6.9 units
 const FOV = 38;
 const VISIBLE_HEIGHT = 2 * CAMERA_DIST * Math.tan(THREE.MathUtils.degToRad(FOV / 2));
 
-// Stacked layout (<= 1051px, matching App.css): the copy runs down from the
-// top, so while it is showing the sphere eases into the empty lower half
-// (centre at 66% of the height). Phones also get a slightly smaller sphere.
-const STACKED_MAX_WIDTH = 1051;
-const LOWERED_CENTER = 0.66;
+// The copy panel runs down from under the name, so while it is showing the
+// sphere eases into the lower half (centre at 68% of the height) and shrinks a
+// little, like the cube dropping lower on Unfold's about page. Phones also get a
+// slightly smaller sphere overall.
+const LOWERED_CENTER = 0.68;
+const LOWERED_SCALE = 0.88;
 const PHONE_MAX_WIDTH = 720;
 const PHONE_SCALE = 0.8;
 const MOVE_RATE = 4; // 1/s, exponential ease toward the target position
@@ -164,22 +165,16 @@ function ParticleSphere({ lowered }) {
     g.rotation.y += dt * SPIN * (reducedMotion ? 0.4 : 1);
     g.rotation.x = g.rotation.y * 0.6; // same diagonal tumble as the old sphere, slower
 
-    const targetY =
-      lowered && size.width <= STACKED_MAX_WIDTH ? (0.5 - LOWERED_CENTER) * VISIBLE_HEIGHT : 0;
-    g.position.y = reducedMotion
-      ? targetY
-      : THREE.MathUtils.damp(g.position.y, targetY, MOVE_RATE, dt);
+    const targetY = lowered ? (0.5 - LOWERED_CENTER) * VISIBLE_HEIGHT : 0;
+    const targetScale =
+      (size.width <= PHONE_MAX_WIDTH ? PHONE_SCALE : 1) * (lowered ? LOWERED_SCALE : 1);
+    const ease = (from, to) =>
+      reducedMotion ? to : THREE.MathUtils.damp(from, to, MOVE_RATE, dt);
+    g.position.y = ease(g.position.y, targetY);
+    g.scale.setScalar(ease(g.scale.x, targetScale));
   });
 
-  const phone = size.width <= PHONE_MAX_WIDTH;
-  return (
-    <points
-      ref={points}
-      geometry={geometry}
-      material={material}
-      scale={phone ? PHONE_SCALE : 1}
-    />
-  );
+  return <points ref={points} geometry={geometry} material={material} />;
 }
 
 export default function Scene({ lowered = false }) {

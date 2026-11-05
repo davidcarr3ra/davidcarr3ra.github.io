@@ -1,7 +1,7 @@
 # davidcarr3ra.com
 
 Personal site. A single screen: the name at the top, a slowly turning particle
-sphere in the middle, and a nav that opens copy panels beside it (layout
+sphere in the middle, and a nav that types copy in under the name (layout
 modelled on [unfoldlabs.xyz](https://unfoldlabs.xyz)).
 
 ## Stack
@@ -38,5 +38,5 @@ character by character and types the new copy in; to edit the copy, change
 The sphere is ~14k points spread uniformly over a sphere's surface. It uses
 dark points with normal blending (Unfold's additive blending washes out on this
 light background). Its look is tuned by the `params` object at the top of
-`Scene.jsx`. On narrow screens the copy stacks under the name and the sphere
-eases lower while a panel is open.
+`Scene.jsx`. While a view is open the sphere eases lower and slightly smaller
+to make room for the copy.

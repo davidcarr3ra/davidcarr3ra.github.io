@@ -41,12 +41,13 @@ const NAV = [
 // Single-screen site: the sphere fills the viewport and the copy panel types in
 // the current view. The view lives in the URL path (/about, /bookshelf; / is
 // just the name and sphere), switched with the History API so the page never
-// reloads. GitHub Pages serves index.html for unknown paths via the 404.html
-// copy made at build time (vite.config.js), so reloads and shared links work.
+// reloads. The build writes a copy of index.html per view (about.html, which
+// GitHub Pages serves for /about) plus 404.html for anything else
+// (vite.config.js), so reloads and shared links work.
 const pathFor = (view) => (view ? `/${view}` : '/');
 
 function viewFromPath() {
-  const key = window.location.pathname.replace(/^\/+|\/+$/g, '');
+  const key = window.location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
   return key in VIEWS ? key : null;
 }
 

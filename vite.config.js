@@ -2,20 +2,24 @@ import { copyFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { VIEWS } from './src/content.js';
 
-// GitHub Pages has no rewrites: a request for /about would 404. Shipping the
-// app's index.html as 404.html makes Pages serve the app for any path, and the
-// app reads the view from the path (App.jsx).
-const spaFallback = () => {
+// GitHub Pages has no rewrites, but it serves `about.html` for a request to
+// `/about`. So each view gets a copy of the app's index.html under its own name
+// (a normal 200, no redirect), and 404.html catches any other path; the app
+// reads the view from the path (App.jsx).
+const pagesForViews = () => {
   let outDir;
   return {
-    name: 'spa-404-fallback',
+    name: 'pages-for-views',
     apply: 'build',
     configResolved(config) {
       outDir = resolve(config.root, config.build.outDir);
     },
     closeBundle() {
-      copyFileSync(resolve(outDir, 'index.html'), resolve(outDir, '404.html'));
+      const index = resolve(outDir, 'index.html');
+      for (const view of Object.keys(VIEWS)) copyFileSync(index, resolve(outDir, `${view}.html`));
+      copyFileSync(index, resolve(outDir, '404.html'));
     },
   };
 };
@@ -23,5 +27,5 @@ const spaFallback = () => {
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
-  plugins: [react(), spaFallback()],
+  plugins: [react(), pagesForViews()],
 });

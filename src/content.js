@@ -1,6 +1,7 @@
 // Copy for each view, as plain data so the typewriter (Typewriter.jsx) can type
 // and delete it character by character. A view is a list of blocks; each block
-// is a paragraph ('p') or list item ('li') made of text parts, optionally muted.
+// is a paragraph ('p') or list item ('li') made of text parts; a part can be
+// muted or a link (href).
 
 const BOOKS = [
   ['Antifragile', 'Nassim Taleb'],
@@ -19,9 +20,19 @@ export const VIEWS = {
       parts: [
         {
           text:
-            "Hi! My name is David Carrera. I'm a software engineer at Palantir and a CS " +
-            'graduate from Columbia University. I love playing guitar, piano, reading, ' +
-            'and aimless walks.',
+            'David Carrera was a technical lead at Palantir Technologies. At Palantir, he ' +
+            'led AI deployments for enterprise clients across the US and South Korea, ' +
+            'including ',
+        },
+        { text: 'United Airlines', href: 'https://www.youtube.com/watch?v=51OH0x8ZPYQ' },
+        { text: ', ' },
+        { text: 'PG&E', href: 'https://www.palantir.com/impact/partner-in-crises/' },
+        { text: ', and ' },
+        { text: 'Hyundai', href: 'https://www.youtube.com/watch?v=ydUdlXftKXI' },
+        {
+          text:
+            ', among others. He holds a B.S. in Computer Science with a concentration in ' +
+            'Artificial Intelligence from Columbia University.',
         },
       ],
     },

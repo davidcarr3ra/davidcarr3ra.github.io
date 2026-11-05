@@ -94,13 +94,21 @@ export function TypedView({ view, chars, caret }) {
       const text = part.text.slice(0, Math.max(0, budget));
       budget -= part.text.length;
       if (!text) return null;
-      return part.muted ? (
-        <span key={j} className="muted">
-          {text}
-        </span>
-      ) : (
-        text
-      );
+      if (part.href) {
+        return (
+          <a key={j} href={part.href} target="_blank" rel="noopener noreferrer">
+            {text}
+          </a>
+        );
+      }
+      if (part.muted) {
+        return (
+          <span key={j} className="muted">
+            {text}
+          </span>
+        );
+      }
+      return <span key={j}>{text}</span>;
     });
     const content = (
       <>
@@ -119,13 +127,4 @@ export function TypedView({ view, chars, caret }) {
   }
   flushList();
   return out;
-}
-
-// The full copy for screen readers (the animated copy is aria-hidden).
-export function FullView({ view }) {
-  if (!view) return null;
-  return VIEWS[view].map((block, i) => {
-    const text = block.parts.map((p) => p.text).join('');
-    return block.type === 'li' ? <span key={i}>{text}. </span> : <p key={i}>{text}</p>;
-  });
 }

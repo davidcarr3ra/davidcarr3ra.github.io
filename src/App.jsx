@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import './App.css';
 import { VIEWS } from './content.js';
-import { FullView, TypedView, useTypewriter } from './Typewriter.jsx';
+import { TypedView, useTypewriter } from './Typewriter.jsx';
 // DEPRECATED (2026-07-03): the Projects section is hidden from the frontend but
 // intentionally kept for future re-enable. Do NOT delete Projects.jsx or this
 // import. It was built for the old scrolling layout; to bring it back, port its
@@ -78,13 +78,10 @@ export default function App() {
           </a>
         </nav>
 
-        <main className="panel">
-          <div aria-hidden="true">
-            <TypedView {...typed} />
-          </div>
-          <div className="sr-only" aria-live="polite">
-            <FullView view={view} />
-          </div>
+        {/* hidden from screen readers only while it types / deletes, so they read
+            the settled copy rather than every keystroke */}
+        <main className="panel" aria-hidden={typed.caret || typed.view !== view}>
+          <TypedView {...typed} />
         </main>
 
         <footer className="bottom">

@@ -31,11 +31,14 @@ src/DevTuner.jsx                 dev-only sliders for the layout values
 src/Components/Projects/         deprecated; kept for re-enable, not rendered
 ```
 
-Views are opened by the URL hash (`#about`, `#bookshelf`; no hash shows just
-the name and sphere), so links, reloads and the back button work without a
-router. As on unfoldlabs.xyz, switching views deletes the current copy
-character by character and types the new copy in; to edit the copy, change
-`content.js`.
+Views are opened by the URL path (`/about`, `/bookshelf`; `/` shows just the
+name and sphere), switched with the History API so the page never reloads, and
+the back button works. GitHub Pages has no rewrites, so the build also writes
+`dist/404.html` (a copy of `index.html`, see `vite.config.js`) and Pages serves
+the app for any path; those pages return HTTP 404 to crawlers, which is fine
+for a one-screen site. Old `#about` links redirect to `/about`. As on
+unfoldlabs.xyz, switching views deletes the current copy character by character
+and types the new copy in; to edit the copy, change `content.js`.
 
 The sphere is ~14k points spread uniformly over a sphere's surface. It uses
 dark points with normal blending (Unfold's additive blending washes out on this

@@ -38,19 +38,59 @@ const NAV = [
 ];
 
 // Single-screen site: the sphere fills the viewport and the copy panel types in
-// the current view. The view lives in the URL hash so links, reloads and the
-// back button all work without a router. No hash = just the name and sphere.
-function viewFromHash() {
-  const key = window.location.hash.slice(1);
+// the current view. The view lives in the URL path (/about, /bookshelf; / is
+// just the name and sphere), switched with the History API so the page never
+// reloads. GitHub Pages serves index.html for unknown paths via the 404.html
+// copy made at build time (vite.config.js), so reloads and shared links work.
+const pathFor = (view) => (view ? `/${view}` : '/');
+
+function viewFromPath() {
+  const key = window.location.pathname.replace(/^\/+|\/+$/g, '');
   return key in VIEWS ? key : null;
 }
 
-function useHashView() {
-  const [view, setView] = useState(viewFromHash);
+// Tidy the address on load: old #about / #bookshelf links become /about, and
+// unknown paths become /.
+function canonicalizeUrl() {
+  const legacy = window.location.hash.slice(1);
+  const view = legacy in VIEWS ? legacy : viewFromPath();
+  const path = pathFor(view);
+  if (window.location.pathname !== path || window.location.hash) {
+    window.history.replaceState(null, '', path + window.location.search);
+  }
+}
+
+const NAVIGATE = 'app:navigate';
+function navigate(view) {
+  const path = pathFor(view);
+  if (window.location.pathname !== path) window.history.pushState(null, '', path);
+  window.dispatchEvent(new Event(NAVIGATE));
+}
+
+// Same-tab clicks on internal links go through navigate(); modified clicks
+// (new tab, etc.) fall through to the real href.
+const linkTo = (view) => ({
+  href: pathFor(view),
+  onClick: (e) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    navigate(view);
+  },
+});
+
+function usePathView() {
+  const [view, setView] = useState(() => {
+    canonicalizeUrl();
+    return viewFromPath();
+  });
   useEffect(() => {
-    const onChange = () => setView(viewFromHash());
-    window.addEventListener('hashchange', onChange);
-    return () => window.removeEventListener('hashchange', onChange);
+    const onChange = () => setView(viewFromPath());
+    window.addEventListener('popstate', onChange);
+    window.addEventListener(NAVIGATE, onChange);
+    return () => {
+      window.removeEventListener('popstate', onChange);
+      window.removeEventListener(NAVIGATE, onChange);
+    };
   }, []);
   return view;
 }
@@ -97,7 +137,7 @@ const SOCIALS = [
 ];
 
 export default function App() {
-  const view = useHashView();
+  const view = usePathView();
   const typed = useTypewriter(view);
   const isPhone = useMediaQuery(`(max-width: ${PHONE_MAX_WIDTH}px)`);
   const tuneVersion = useSyncExternalStore(subscribeTune, getTuneVersion); // re-render on tuning
@@ -117,7 +157,7 @@ export default function App() {
       <div className="overlay" style={{ '--sphere-top': sphereTop }}>
         <div className="upper">
           <header className="top">
-            <a className="brand" href="#">
+            <a className="brand" {...linkTo(null)}>
               <h1>David Carrera</h1>
             </a>
           </header>
@@ -127,7 +167,7 @@ export default function App() {
               // toggles: clicking the open view's link closes it
               <a
                 key={key}
-                href={view === key ? '#' : `#${key}`}
+                {...linkTo(view === key ? null : key)}
                 aria-current={view === key ? 'page' : undefined}
               >
                 {label}
